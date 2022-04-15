@@ -139,3 +139,6 @@ dmypy.json
 cython_debug/
 
 .idea
+/static
+/cms/migrations/
+/study/migrations/
