@@ -8,9 +8,8 @@ class LearnView(View):
     '''main page view'''
     def get(self, request):
         if request.user.is_authenticated:
-            student = Student.objects.get(user=request.user)
             context = {
-                'student': student
+                'student': Student.objects.get(user=request.user)
             }
             return render(request, 'learn.html', context)
         else:
@@ -21,10 +20,33 @@ class ReadingView(View):
     '''main page view'''
     def get(self, request):
         if request.user.is_authenticated:
-            student = Student.objects.get(user=request.user)
             context = {
-                'student': student
+                'student': Student.objects.get(user=request.user)
             }
             return render(request, 'reading.html', context)
+        else:
+            return redirect('/')
+
+
+class AuditionView(View):
+    '''Аудирование'''
+    def get(self, request):
+        if request.user.is_authenticated:
+            context = {
+                'student': Student.objects.get(user=request.user)
+            }
+            return render(request, 'audition.html', context)
+        else:
+            return redirect('/')
+
+
+class SyntaxView(View):
+    '''Синтаксис'''
+    def get(self, request):
+        if request.user.is_authenticated:
+            context = {
+                'student': Student.objects.get(user=request.user)
+            }
+            return render(request, 'syntax.html', context)
         else:
             return redirect('/')

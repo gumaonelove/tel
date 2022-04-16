@@ -1,0 +1,65 @@
+{% extends 'learn.html' %}
+{% load static %}
+{% block content %}
+    <div class="wrapper learn-section learn-section-audition">
+        <div class="crumbs">
+            <div class="crumbs__container container">
+                <a href="{% url 'learn_navigations' %}" class="crumbs__back">
+                    <- вернуться к выбору</a>
+            </div>
+        </div>
+        <div class="audition active">
+            <div class="audition__container container">
+                <div class="audition__content test-content">
+                    <div class="audition__title test-title">аудирование</div>
+                    <div class="audition__subtitle test-subtitle">
+                        вам будет предложено прослушать ряд слов и выбрать то, которое вам кажется подходящим под
+                        звучание
+                    </div>
+                    <div class="audition__block">
+                        <div class="audition__proccess">1/10</div>
+                        <div class="audition__block-content">
+                            <div class="audition__block-content-border bordered">
+                                <div class="audition__block-top">
+                                    <div class="audition__text audition__item blurred">абракадабра</div>
+                                    <a href="#" class="audition__start audition__item button">прослушать</a>
+                                </div>
+                                <div class="audition__block-middle">
+                                    выберите правильный вариант:
+                                </div>
+                                <div class="audition__block-bottom">
+                                    <a href="#" class="audition__btn audition__item button">
+                                        абракадабра
+                                    </a>
+                                    <a href="#" class="audition__btn audition__item button">
+                                        шляпа
+                                    </a>
+                                </div>
+                            </div>
+                            <a href="#" class="audition__next button">
+                                <img src="{% static '/icons/arrow-right.svg' %}" alt="arrow">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="result result__audition ">
+            <div class="result__container container">
+                <div class="result__content test-content">
+                    <div class="result__title test-title">ваш результат</div>
+                    <div class="result__block">
+                        <div class="result__audition-title result__block-title result__audition-title-1">количество
+                            правильных ответов:<span class="result__word-count-audition result__word-count">5/10</span>
+                        </div>
+                        <div class="result__answer green">*поздравляем, это хороший результат*</div>
+                    </div>
+                    <div class="result__buttons">
+                        <a href="../" class="result__btn button">вернуться к выбору</a>
+                        <a href="#" class="result__btn result__try button">попробовать еще раз</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

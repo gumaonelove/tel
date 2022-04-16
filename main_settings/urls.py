@@ -7,6 +7,7 @@ urlpatterns = [
     path('', include('cms.urls')),
     path('admin/', admin.site.urls),
     path('study/', include('study.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 if settings.DEBUG:

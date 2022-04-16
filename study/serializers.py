@@ -1,8 +1,27 @@
 from rest_framework import serializers
 
+from .models import Student, Texts
 
-class CustomerSerializer(serializers.ModelSerializer):
+
+class UserSerializer(serializers.Serializer):
+    '''Представление пользователя'''
+    email = serializers.EmailField()
+    username = serializers.CharField(max_length=100)
+
+
+class StudentSerializer(serializers.HyperlinkedModelSerializer):
+    '''Модель студента'''
+
+    user = UserSerializer()
 
     class Meta:
-        model = Customer
-        fields = ('pk','first_name', 'last_name', 'email', 'phone','address','description')
+        model = Student
+        fields = '__all__'
+
+
+class TextSerializer(serializers.HyperlinkedModelSerializer):
+    '''Модель Текстов'''
+
+    class Meta:
+        model = Texts
+        fields = '__all__'

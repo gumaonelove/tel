@@ -38,7 +38,7 @@
                             <span>чтение - тестирование способности навыков чтения </span>
                             <div class="learn__img"><img src="{% static '/icons/icon-1.svg' %}" alt="1"></div>
                         </a>
-                        <a href="#" class="learn__item">
+                        <a href="{% url 'audition' %}" class="learn__item">
                             <span>аудирование - проверка знаний слов</span>
                             <div class="learn__img"><img src="{% static '/icons/icon-2.svg' %}" alt="2"></div>
                         </a>
@@ -46,7 +46,7 @@
                             <span>чат-бот на татарском</span>
                             <div class="learn__img"><img src="{% static '/icons/icon-3.svg' %}" alt="3"></div>
                         </a>
-                        <a href="#" class="learn__item">
+                        <a href="{% url 'syntax' %}" class="learn__item">
                             <span>синтаксис - составление предложений </span>
                             <div class="learn__img"><img src="{% static '/icons/icon-4.svg' %}" alt="4"></div>
                         </a>
@@ -69,7 +69,7 @@
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <script src="/js/script.min.js"></script>
+    <script src="{% static '/js/script.js' %}"></script>
 </body>
 
 </html>

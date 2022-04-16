@@ -99,9 +99,9 @@
             async function sendRequest(data) {
                 const url = "{% url 'auth' %}";
                 const csrftoken = '{{ csrf_token }}';
-                let status = request(url, data, csrftoken);
+                request(url, data, csrftoken);
 
-                setTimeout(() => window.open("{% url 'learn_navigations' %}", '_self', false), 100);
+                setTimeout(() => window.open("{% url 'learn_navigations' %}", '_self', false), 500);
             }
             }
         </script>

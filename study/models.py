@@ -16,6 +16,10 @@ class Student(models.Model):
     birth_day_date = models.DateField(verbose_name='Дата рождения')
     photo = models.ImageField(verbose_name='Фото')
 
+    rang = models.FloatField(verbose_name='Ранг пользователя', default=0)
+
+    texts = models.ManyToManyField('Texts', verbose_name='Текста прочитанные пользователем', null=True, blank=True)
+
     def get_full_name(self):
         return f'{self.surname} {self.name} {self.lastname}'
 
@@ -24,4 +28,14 @@ class Student(models.Model):
 
     def __str__(self):
         return f'Пользователь - {self.id} - {self.get_full_name()}'
+
+
+class Texts(models.Model):
+    '''Текст для чтения'''
+    title = models.TextField(verbose_name='Название текста')
+    text_html = models.TextField(verbose_name='Текст с форматированием')
+    text = models.TextField(verbose_name='Сырой текст')
+
+    def __str__(self):
+        return f'Текст для чтения - {self.title}'
 
