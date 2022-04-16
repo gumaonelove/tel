@@ -1,6 +1,7 @@
 {% extends 'learn.html' %}
 {% load static %}
 {% block content %}
+    {% csrf_token %}
     <div class="wrapper learn-section learn-section-audition">
         <div class="crumbs">
             <div class="crumbs__container container">
@@ -11,6 +12,7 @@
         <div class="audition active">
             <div class="audition__container container">
                 <div class="audition__content test-content">
+                    {% if not king_of_the_audition %}
                     <div class="audition__title test-title">аудирование</div>
                     <div class="audition__subtitle test-subtitle">
                         вам будет предложено прослушать ряд слов и выбрать то, которое вам кажется подходящим под
@@ -42,6 +44,9 @@
                             </a>
                         </div>
                     </div>
+                    {% else %}
+                        <div class="audition__title test-title">Поздравляю <br> Вы выучили все слова</div>
+                    {% endif %}
                 </div>
             </div>
         </div>

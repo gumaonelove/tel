@@ -1,8 +1,9 @@
 from django.http import JsonResponse
+
 from rest_framework import viewsets
 from rest_framework import permissions
 
-from .models import Text, Word
+from .models import Text, Word, Student
 from .serializers import TextSerializer, WordSerializer
 
 from django.views import View
@@ -22,19 +23,34 @@ class WordViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class GetWorsForAudition(View):
+class GetWordsForAuditionApi(View):
+    '''Отдаю слова для аудирования'''
     def get(self, request):
-        words = Word.objects.all()
+        if request.user.is_authenticated:
+            student = Student.objects.get(user=request.user)
 
-        tatar_true, tatar_false = [], []
+            learned_words_qs, words_qs = student.words.all(), Word.objects.all()
+            learned_words, words = set(), set()
 
-        for index in range(2, 2 * (len(words)//2), 2):
-            tatar_true.append(words[index].tatar)
-            tatar_false.append(words[index-1].tatar)
+            for learned_word in learned_words_qs:
+                learned_words.add(learned_word.word.tatar)
 
-        context = {
-            'true_words': tatar_true,
-            'false_words': tatar_false
-        }
+            for word in words_qs:
+                words.add(word.tatar)
 
-        return JsonResponse(context)
+            answer_words = list(words - learned_words)
+            tatar_true, tatar_false = [], []
+
+            for index in range(2, (2 * len(answer_words) + 1) // 2 , 2):
+                tatar_true.append(answer_words[index])
+                tatar_false.append(answer_words[index - 1])
+                if len(tatar_true) <= 10: break
+
+            context = {
+                'true_words': tatar_true,
+                'false_words': tatar_false,
+            }
+
+            return JsonResponse(context)
+        else:
+            return JsonResponse({})

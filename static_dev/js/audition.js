@@ -17,6 +17,19 @@ async function n() {
     });
 }
 
+async function request(url, data, csrftoken) {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(data),
+    });
+    const result = await response.text();
+    return result;
+}
+
 // end gumaonelove script
 
 let globalCount = 0;
@@ -33,22 +46,21 @@ function playAudio() {
     aud.play();
 }
 
-let playButton = document.querySelector('.audition__start')
+let playButton = document.querySelector('.audition__start');
 playButton.addEventListener('click', (e) => {
     e.preventDefault();
     playAudio();
-})
+});
 
-let jsonFromBackend = await getArrayFromBackend('http://127.0.0.1:8000/study/get_words/');
+let jsonFromBackend = await getArrayFromBackend('http://192.168.0.208:8000/study/get_words/');
 let trueVariant = jsonFromBackend['true_words'];
-console.log(jsonFromBackend);
 let otherVariant = jsonFromBackend['false_words'];
 let auditionBtn = document.querySelectorAll('.audition__btn');
-let auditionBlockBottom = document.querySelector('.audition__block-bottom')
-let auditionText = document.querySelector('.audition__text')
-let nextElem = document.querySelector('.audition__next')
+let auditionBlockBottom = document.querySelector('.audition__block-bottom');
+let auditionText = document.querySelector('.audition__text');
+let nextElem = document.querySelector('.audition__next');
 let auditionLast = document.getElementById('audition-last');
-let auditionProcess = document.getElementById('audition-process')
+let auditionProcess = document.getElementById('audition-process');
 let resultAudition = document.querySelector('.result__audition');
 let auditionBlock = document.querySelector('.audition');
 let auditionMiddle = document.querySelector('.audition__block-middle');
@@ -63,19 +75,19 @@ auditionBtn.forEach((elem) => {
         auditionText.classList.remove('blurred');
         if (trueVariant.includes(clearElemText)) {
             elem.classList.add('success');
-            auditionMiddle.innerHTML = 'все верно!'
-            userTrueVariants.push(clearElemText)
+            auditionMiddle.innerHTML = 'все верно!';
+            userTrueVariants.push(clearElemText);
         } else {
             elem.classList.add('defeat');
-            auditionMiddle.innerHTML = 'ошибка ;('
+            auditionMiddle.innerHTML = 'ошибка ;(';
         }
         if (auditionProcess.textContent < trueVariant.length) {
             nextElem.classList.add('active');
         } else {
             seeResults();
         }
-    })
-})
+    });
+});
 
 function getRandomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -84,19 +96,35 @@ function getRandomInRange(min, max) {
 
 function seeResults() {
     resultAudition.classList.add('active');
-    auditionBlock.classList.remove('active')
+    auditionBlock.classList.remove('active');
     let resultTrueVariant = document.getElementById('resultTrueAudition');
     let resultAllVariant = document.getElementById('resultAllAudition');
     let resultTrueText = document.getElementById('resultTrueText');
     resultTrueVariant.innerHTML = userTrueVariants.length;
     resultAllVariant.innerHTML = trueVariant.length;
-    if ((userTrueVariants.length / trueVariant.length) >= 0.7) {
-        resultTrueText.innerHTML = '*поздравляем, это хороший результат*'
-        resultTrueText.classList.add('green')
-    } else {
-        resultTrueText.innerHTML = '*к сожалению, у вас пока недостаточный результат :(*'
-        resultTrueText.classList.add('red')
+    var a = document.cookie.split(';');
+    var token = '';
+    for (let i = 0; i < a.length; i++) {
+        var b = a[i].split('=');
+        b[0] = b[0].replace(/\s+/g, '');
+        if (b[0] === 'csrftoken') {
+            token = b[1];
+        }
     }
+    let url = 'http://192.168.0.208:8000/study/audition/';
+    let data = {
+        'userTrueVariants': userTrueVariants,
+    };
+    if ((userTrueVariants.length / trueVariant.length) >= 0.7) {
+        resultTrueText.innerHTML = '*поздравляем, это хороший результат*';
+        resultTrueText.classList.add('green');
+        request(url, data, token);
+    } else {
+        resultTrueText.innerHTML = '*к сожалению, у вас пока недостаточный результат :(*';
+        resultTrueText.classList.add('red');
+    }
+
+
 }
 
 auditionLast.innerHTML = trueVariant.length;
@@ -107,23 +135,23 @@ nextElem.addEventListener('click', (e) => {
     globalCount += 1;
     updateBtns();
     pastAudioLink();
-    auditionMiddle.innerHTML = 'выберите правильный вариант:'
-    nextElem.classList.remove('active')
-    auditionBlockBottom.classList.remove('active')
-    auditionText.classList.add('blurred')
+    auditionMiddle.innerHTML = 'выберите правильный вариант:';
+    nextElem.classList.remove('active');
+    auditionBlockBottom.classList.remove('active');
+    auditionText.classList.add('blurred');
     auditionProcess.innerHTML = parseInt(auditionProcess.textContent) + 1;
     auditionBtn.forEach(() => {
         for (let i = 0; i < auditionBtn.length; i++) {
             if (auditionBtn[i].classList.contains('success')) {
-                auditionBtn[i].classList.remove('success')
+                auditionBtn[i].classList.remove('success');
             } else {
-                auditionBtn[i].classList.remove('defeat')
+                auditionBtn[i].classList.remove('defeat');
             }
         }
     })
 })
 
-let resultTry = document.querySelector('.result__try')
+let resultTry = document.querySelector('.result__try');
 resultTry.addEventListener('click', (e) => {
     e.preventDefault();
     window.location.reload();
@@ -140,4 +168,4 @@ function updateBtns() {
 
 updateBtns();
 }
-n()
+n();

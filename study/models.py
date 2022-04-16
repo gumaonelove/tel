@@ -41,7 +41,7 @@ class Student(models.Model):
 class ReadText(models.Model):
     '''Прочитанный тексты'''
     text = models.ForeignKey('Text', verbose_name='Текст', on_delete=models.CASCADE)
-    data = models.DateField(verbose_name='Дата прочтения текста', auto_created=True)
+    data = models.DateField(verbose_name='Дата прочтения текста',  auto_now_add=True)
     rang = models.FloatField(verbose_name="Процент точности")
     student = models.ForeignKey('Student', verbose_name='Пользователь', on_delete=models.CASCADE)
 
@@ -53,7 +53,7 @@ class LearnWords(models.Model):
     '''Выученные слова'''
 
     word = models.ForeignKey('Word', verbose_name='Текст', on_delete=models.CASCADE)
-    data = models.DateField(verbose_name="Когда выучил слово", auto_created=True)
+    data = models.DateField(verbose_name="Когда выучил слово", auto_now_add=True)
     student = models.ForeignKey('Student', verbose_name='Пользователь', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -84,3 +84,11 @@ class Image(models.Model):
 
     def __str__(self):
         return self.img.name
+
+
+class Sentence(models.Model):
+    '''Предложения для грамматического конструктора'''
+    text = models.TextField(verbose_name='Предложение')
+
+    def __str__(self):
+        return f'Предложение - {self.id}'

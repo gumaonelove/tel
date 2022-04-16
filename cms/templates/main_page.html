@@ -15,25 +15,25 @@
 </head>
 
 <body>
-    <nav class="main-nav" id="main-nav">
-        <div class="main-nav__container container">
-            <a href="/" class="main-nav__logo">TatLearn</a>
-            {% if request.path == '/' %}
-                <div class="main-nav-link-block">
-                    <a href="{% url 'auth' %}" class="main-nav-link">вход</a>
-                </div>
-            {% endif %}
-        </div>
-    </nav>
-    {% block content %}
-    <header class="header" id="header">
-    <div class="header__container container">
-        <h1 class="header-heading">
-            <span>изучение татарского</span>
-            <span>вместе с TatLearn</span>
-        </h1>
+<nav class="main-nav" id="main-nav">
+    <div class="main-nav__container container">
+        <a href="/" class="main-nav__logo">TatLearn</a>
+        {% if request.path == '/' %}
+            <div class="main-nav-link-block">
+                <a href="{% url 'auth' %}" class="main-nav-link">вход</a>
+            </div>
+        {% endif %}
     </div>
-</header>
+</nav>
+{% block content %}
+    <header class="header" id="header">
+        <div class="header__container container">
+            <h1 class="header-heading">
+                <span>изучение татарского</span>
+                <span>вместе с TatLearn</span>
+            </h1>
+        </div>
+    </header>
 
     <div class="wrapper">
         <section class="page-section">
@@ -69,19 +69,18 @@
             </div>
         </section>
     </div>
-    {% endblock content %}
-    <footer class="footer" id="footer">
+{% endblock content %}
+<footer class="footer" id="footer">
     <div class="footer__container container">
         <p class="footer-copyright">copyright internationaldudes {{ year }}</p>
-        <p class="footer-contacts">contact us:<br />{{ phone }}/{{ email }}</p>
+        <p class="footer-contacts">contact us:<br/>{{ phone }}/{{ email }}</p>
     </div>
 </footer>
 
 
-
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
 </body>
 
 </html>

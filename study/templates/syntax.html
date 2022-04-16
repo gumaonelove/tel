@@ -1,7 +1,7 @@
 {% extends 'learn.html' %}
 {% load static %}
 {% block content %}
-    <div class="wrapper learn-section learn-section-syntax">
+   <div class="wrapper learn-section learn-section-syntax">
         <div class="crumbs">
             <div class="crumbs__container container">
                 <a href="{% url 'learn_navigations' %}" class="crumbs__back">
@@ -18,20 +18,12 @@
                     <div class="syntax__block">
                         <div class="syntax__block-top">
                             <div class="syntax__block-top-items syntax__block-items">
-                                <div class="syntax__block-top-item syntax__block-item"></div>
-                                <div class="syntax__block-top-item syntax__block-item"></div>
-                                <div class="syntax__block-top-item syntax__block-item"></div>
-                                <div class="syntax__block-top-item syntax__block-item"></div>
-                                <div class="syntax__block-top-item syntax__block-item"></div>
+
                             </div>
                         </div>
                         <div class="syntax__block-bottom">
                             <div class="syntax__block-bottom-items syntax__block-items">
-                                <div class="syntax__block-bottom-item active syntax__block-item">абракадабра</div>
-                                <div class="syntax__block-bottom-item active syntax__block-item">абракадабра</div>
-                                <div class="syntax__block-bottom-item active syntax__block-item">абракадабра</div>
-                                <div class="syntax__block-bottom-item active syntax__block-item">абракадабра</div>
-                                <div class="syntax__block-bottom-item active syntax__block-item">абракадабра</div>
+
                             </div>
                         </div>
                         <div class="syntax__button"><a href="#" class="syntax__check button">проверить</a></div>
@@ -55,11 +47,132 @@
                         <div class="result__answer green">поздравляем, вы все сделали правильно!</div>
                     </div>
                     <div class="result__buttons">
-                        <a href="../" class="result__btn button">вернуться к выбору</a>
+                        <a href="{% url 'learn_navigations' %}" class="result__btn button">вернуться к выбору</a>
                         <a href="#" class="result__btn result__try button">попробовать еще раз</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+    let html2block = [];
+const block2 = document.querySelector(".syntax__block-bottom-items");
+window.onload = () => {
+  document.querySelector(".result__try").addEventListener("click", () => {
+    window.location.reload();
+  });
+  let s = '{{ sentence }}';
+  let filledCounter = 0;
+  let sentence = s.split(" ");
+  let i = 1;
+  for (word of sentence) createBlock(word, i++);
+  shuffleArray(html2block);
+  for (block of html2block) block2.innerHTML += block;
+  let dragged;
+  document.addEventListener("dragstart", (e) => {
+    dragged = e.target;
+  });
+  document.addEventListener("drop", (e) => {
+    e.preventDefault();
+    e.target.classList.contains("syntax__block-top-item") &&
+      (e.target.style.background = "#e7e7e7");
+    e.target.classList.contains("syntax__block-bottom-items") &&
+      (e.target.style.background = "transparent");
+    if (
+      e.target.classList.contains("syntax__block-top-item") ||
+      e.target.classList.contains("syntax__block-bottom-items")
+    ) {
+      const prev = dragged.parentNode.classList.contains(
+        "syntax__block-top-item"
+      );
+      dragged.parentNode.classList.contains("syntax__block-top-item") &&
+        dragged.parentNode.classList.remove("filled");
+      dragged.parentNode.removeChild(dragged);
+      e.target.appendChild(dragged);
+      dragged.parentNode.classList.contains("syntax__block-top-item") &&
+        dragged.parentNode.classList.add("filled");
+      const curr = dragged.parentNode.classList.contains(
+        "syntax__block-top-item"
+      );
+      prev != curr &&
+        dragged.parentNode.classList.contains("syntax__block-top-item") &&
+        filledCounter++;
+      prev != curr &&
+        dragged.parentNode.classList.contains("syntax__block-bottom-items") &&
+        filledCounter--;
+      if (filledCounter == sentence.length) {
+        const blocks = document.querySelectorAll(".syntax__block-top-item");
+        let ok = true;
+        let userStr = "";
+        for (block of blocks) {
+          block.firstChild.dataset.id != block.dataset.id && (ok = false);
+          userStr += block.firstChild.innerHTML + " ";
+        }
+        document.querySelector(".syntax").classList.remove("active");
+        document.querySelector(".result").classList.add("active");
+        document.querySelector("#yourVariantSyntax").innerHTML = userStr;
+        document.querySelector("#trueVariantSyntax").innerHTML = s;
+        const r = document.querySelector(".result__answer");
+        if (!ok) {
+          r.innerHTML = "неправильно, нужно учиться еще!";
+          r.classList.remove("green");
+          r.classList.add("red");
+        }
+      }
+    }
+  });
+  document.addEventListener(
+    "dragover",
+    function (event) {
+      // prevent default to allow drop
+      event.preventDefault();
+    },
+    false
+  );
+  document.addEventListener(
+    "dragenter",
+    function (event) {
+      // highlight potential drop target when the draggable element enters it
+      if (event.target.classList.contains("syntax__block-top-item")) {
+        event.target.style.background = "#b7b7b7";
+      }
+      if (event.target.classList.contains("syntax__block-bottom-items")) {
+        event.target.style.background = "#eaeaea";
+      }
+    },
+    false
+  );
+  document.addEventListener(
+    "dragleave",
+    function (event) {
+      // highlight potential drop target when the draggable element enters it
+      if (event.target.classList.contains("syntax__block-top-item")) {
+        event.target.style.background = "#e7e7e7";
+      }
+      if (event.target.classList.contains("syntax__block-bottom-items")) {
+        event.target.style.background = "transparent";
+      }
+    },
+    false
+  );
+};
+
+function createBlock(str, index) {
+  const block1 = document.querySelector(".syntax__block-top-items");
+  const html1 = `<div class="syntax__block-top-item syntax__block-item" data-id="${index}"></div>`;
+  const html2 = `<div draggable="true" class="syntax__block-bottom-item active syntax__block-item" data-id="${index}">${str}</div>`;
+  block1.innerHTML += html1;
+  html2block.push(html2);
+}
+
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+}
+
+    </script>
 {% endblock content %}

@@ -4,7 +4,7 @@ from json import loads
 from django.shortcuts import render, redirect
 from django.views import View
 
-from .models import Student, Text, Word
+from .models import Student, Text, Word, LearnWords, Sentence
 from .forms import ImageForm
 
 
@@ -36,11 +36,11 @@ class ReadingView(View):
                     not_reading_texts.append(text)
 
             if not_reading_texts:
-                random_index = random.randint(0, len(texts))
+                random_index = random.randint(0, len(texts) - 1)
                 text = texts[random_index]
             else:
                 king_of_the_reading = True
-                random_index = random.randint(0, len(texts))
+                random_index = random.randint(0, len(texts) - 1)
                 text = texts[random_index]
 
             context = {
@@ -53,20 +53,40 @@ class ReadingView(View):
             return redirect('/')
 
 
-    def post(self, request):
-        print(request)
-
-
 class AuditionView(View):
     '''Аудирование'''
     def get(self, request):
         if request.user.is_authenticated:
             student  = Student.objects.get(user=request.user)
+            king_of_the_audition = False
+            learned_words_qs, words_qs = student.words.all(), Word.objects.all()
+
+            if len(words_qs) - len(learned_words_qs) <= 2: king_of_the_audition = True
 
             context = {
-                'student': student
+                'student': student,
+                'king_of_the_audition': king_of_the_audition
             }
             return render(request, 'audition.html', context)
+        else:
+            return redirect('/')
+
+    def post(self, request):
+        if request.user.is_authenticated:
+            student = Student.objects.get(user=request.user)
+
+            user_true_variants = loads(request.body)['userTrueVariants']
+
+            for text_word in user_true_variants:
+                true_word = Word.objects.get(tatar=text_word)
+                new_learned_word = LearnWords()
+                new_learned_word.word = true_word
+                new_learned_word.student = student
+                new_learned_word.save()
+
+                student.words.add(new_learned_word)
+
+            return redirect('/study/audition/')
         else:
             return redirect('/')
 
@@ -75,8 +95,18 @@ class SyntaxView(View):
     '''Синтаксис'''
     def get(self, request):
         if request.user.is_authenticated:
+            student = Student.objects.get(user=request.user)
+            sentences = Sentence.objects.all()
+
+            sentence_list = []
+
+            for sentence in sentences:
+                sentence_list.append(sentence.text)
+
+            random_index = random.randint(0, len(sentence_list) - 1)
             context = {
-                'student': Student.objects.get(user=request.user)
+                'student': student,
+                'sentence': sentence_list[random_index]
             }
             return render(request, 'syntax.html', context)
         else:
