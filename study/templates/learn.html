@@ -21,7 +21,9 @@
             <div class="header-learn__info">
                 <div class="header-learn__name">{{ student.get_sn }}</div>
                 <a href="{% url 'profile' %}" class="header-learn__avatar">
-                    <img src="{{ student.photo.url }}" alt="{{ student.get_sn }}">
+                    {% if student.photo %}
+                        <img src="{{ student.get_photo_url }}" alt="{{ student.get_sn }}">
+                    {% endif %}
                 </a>
             </div>
         </div>

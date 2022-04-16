@@ -25,41 +25,64 @@
         <div class="profile">
             <div class="profile__container container">
                 <div class="profile__content">
+                {% if student.full_complited %}
                     <div class="profile__title">{{ student.get_sn }}</div>
+                {% endif %}
                     <div class="crumbs">
                         <div class="crumbs__container container">
-                            <a href="{% url 'learn_navigations' %}" class="crumbs__back">
-                                <- вернуться к обучению </a>
+                            {% if student.full_complited %}
+                                <a href="{% url 'learn_navigations' %}" class="crumbs__back">
+                                    <- вернуться к обучению
+                                </a>
+                            {% else %}
+                                <b class="crumbs__back">Заполните данные профиля</b>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="profile__block">
                         <div class="profile__left">
                             <form class="profile__form">
                                 <div class="profile__input">
-                                    <label for="profileName">имя</label>
-                                    <input type="text" id="profileName" value="Иван">
+                                    <label for="profileName">логин</label>
+                                    <input type="text" id="profileLogin" value="{{ student.user.username }}">
                                 </div>
                                 <div class="profile__input">
                                     <label for="profileLastname">фамилия</label>
-                                    <input type="text" id="profileLastname" value="Иванов">
+                                    <input type="text" id="profileSurname" value="{% if student.surname %}{{ student.surname }}{% else %}...{% endif %}">
+                                </div>
+                                <div class="profile__input">
+                                    <label for="profileName">имя</label>
+                                    <input type="text" id="profileName" value="{% if student.name %}{{ student.name }}{% else %}...{% endif %}">
                                 </div>
                                 <div class="profile__input">
                                     <label for="profilePatronymic">отчество</label>
-                                    <input type="text" id="profilePatronymic" value="Иванович">
+                                    <input type="text" id="profileLastname" value="{% if student.lastname %}{{ student.lastname }}{% else %}...{% endif %}">
                                 </div>
                                 <div class="profile__input">
-                                    <label for="profileDateOfBirth">дата рождения</label>
-                                    <input type="text" id="profileDateOfBirth" value="03.07.2003">
+                                    <label for="profileDateOfBirth">дата рождения </label>
+                                    {% if student.birth_day_date %}
+                                        <input type="text" id="profileDateOfBirth" value="{{ student.birth_day_date }}">
+                                    {% else %}
+                                        <input type="date" id="profileDateOfBirth">
+                                    {% endif %}
+
                                 </div>
                                 <div class="profile__input">
-                                    <label></label>
-                                    <a href="#" class="profile__btn button">поменять фотографию</a>
+                                    <a href="#" class="profile__btn button" id="save-button">сохранить</a>
                                 </div>
                             </form>
                         </div>
                         <div class="profile__right">
                             <div class="profile__img">
-                                <img src="{{ student.photo.url }}" alt="ildar">
+                                {% if student.photo %}
+                                    <img src="{{ student.get_photo_url }}" alt="ildar">
+                                {% else %}
+                                    <form method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <button class="profile__btn button" type="submit">загрузить фотографию</button>
+                                    </form>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -67,6 +90,28 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/request.js' %}"></script>
+    <script>
+        let elem = document.getElementById('save-button');
+        elem.addEventListener('click', (e) => {
+            e.preventDefault();
+            let data = {
+                'login': document.getElementById('profileLogin').value,
+                'surname': document.getElementById('profileSurname').value,
+                'name': document.getElementById('profileName').value,
+                'lastname': document.getElementById('profileLastname').value,
+                'birth_day_date': document.getElementById('profileDateOfBirth').value,
+            };
+            sendRequest(data);
+            setTimeout(() => window.location.reload(), 1000);
+        });
+
+        async function sendRequest(data){
+            const url = "{% url 'profile' %}";
+            const csrftoken = '{{ csrf_token }}';
+            request_put(url, data, csrftoken);
+        }
+    </script>
 
 
 

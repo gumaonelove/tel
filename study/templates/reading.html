@@ -17,13 +17,11 @@
                         для выполнения задания нужно разрешить доступ к микрофону</div>
                     <div class="reading__block">
                         <div class="reading__left">
-                            <p class="reading__descr">
-                                {{ text.text_html|safe }}
-                            </p>
+                            <p class="reading__descr blurred"></p>
                         </div>
                         <div class="reading__right">
-                            <a href="#" class="reading__btn button start active">Начать тест</a>
-                            <a href="#" class="reading__btn button play">
+                            <a href="#" class="reading__btn button start active" id="test_btn">Начать тест</a>
+                            <a href="#" class="reading__btn button play" id="record_btn">
                                 <span class="reading__btn-timer">00:00</span>
                                 <span class="reading__btn-text">Закончить запись</span>
                             </a>
@@ -32,21 +30,110 @@
                 </div>
             </div>
         </div>
-        <div class="result">
+        <div class="result result__reading">
             <div class="result__container container">
                 <div class="result__content test-content">
                     <div class="result__title test-title">ваш результат</div>
                     <div class="result__block">
-                        <div class="result__reading-title result__reading-title-1">количество слов в минуту: <span
-                                class="result__word-count">777</span></div>
-                        <div class="result__reading-title result__reading-title-2">процент корректного произношения:
-                            <span class="result__correct-count">80%</span>
+                        <div class="result__reading-title result__block-title result__reading-title-1">количество слов в
+                            минуту: <span class="result__word-count-reading result__word-count">загрузка...</span></div>
+                        <div class="result__reading-title result__block-title result__reading-title-2">процент
+                            корректного произношения:
+                            <span class="result__correct-count-reading result__correct-count">загрузка...</span>
                         </div>
                         <div class="result__answer green">*поздравляем, это хороший результат*</div>
                     </div>
-                    <a href="../" class="result__btn button">вернуться к выбору</a>
+                    <a href="{% url 'learn_navigations' %}" class="result__btn button">вернуться к выбору</a>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="/static/js/script.js"></script>
+    <script src="/static/js/lib/WebAudioRecorder.js"></script>
+    <script>
+    window.onload = () => {
+      let text = `{{ text.text }}`;
+
+      const p = document.querySelector(".reading__descr");
+
+      p.innerText = text;
+      const testBtn = document.querySelector("#test_btn");
+      const recordBtn = document.querySelector("#record_btn");
+      const resultBlock = document.querySelector(".result-reading");
+      const timer = document.querySelector(".reading__btn-timer");
+
+      let interval, recorder;
+      let seconds = 0;
+
+      testBtn.addEventListener("click", () => {
+        navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+          testBtn.classList.remove("active");
+          recordBtn.classList.add("active");
+          p.classList.remove("blurred");
+          interval = setInterval(() => {
+            seconds++;
+            let minutes = Math.trunc(seconds / 60);
+            minutes = minutes > 9 ? String(minutes) : "0" + String(minutes);
+            let restSeconds = seconds % 60;
+            restSeconds =
+              restSeconds > 9 ? String(restSeconds) : "0" + String(restSeconds);
+            timer.innerHTML = `${minutes}:${restSeconds}`;
+          }, 1000);
+          let AudioContext = window.AudioContext || window.webkitAudioContext;
+          let audioContext = new AudioContext();
+          let source = audioContext.createMediaStreamSource(stream);
+          const webAudioRecorder = new WebAudioRecorder(source, {
+            workerDir: "/static/js/lib/",
+            encoding: "wav",
+            numChannels: 1,
+            options: {
+              encodeAfterRecord: true,
+            },
+          });
+
+          recorder = webAudioRecorder;
+          webAudioRecorder.onComplete = async (webAudioRecorder, blob) => {
+            const fd = new FormData();
+            fd.append("file", blob);
+            text = text.toLowerCase();
+            text = text
+              .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+              .replace(/\s{2,}/g, " ");
+            fd.append("text", text);
+            const response = await fetch(
+              "http://127.0.0.1:5000/rouge",
+              {
+                method: "POST",
+                body: fd,
+              }
+            );
+            const body = await response.json();
+            let score = body.score.toFixed(1);
+            score < 0 && (score = 0)
+            const recognised = body.text;
+            const speed = recognised.split(" ").length / (seconds / 60);
+            document.querySelector(".result__word-count").innerHTML = speed;
+            document.querySelector(".result__correct-count").innerHTML =
+              (score * 100).toFixed(1) + "%";
+          };
+          webAudioRecorder.onError = (webAudioRecorder, err) => {
+            console.error(err);
+          };
+          webAudioRecorder.startRecording();
+        });
+      });
+
+      recordBtn.addEventListener("click", () => {
+        recorder.finishRecording();
+        clearInterval(interval);
+        document.querySelector(".reading").classList.remove("active");
+        document.querySelector(".result").classList.add("active");
+      });
+    };
+    </script>
 {% endblock content %}

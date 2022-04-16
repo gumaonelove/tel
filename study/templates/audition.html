@@ -17,11 +17,12 @@
                         звучание
                     </div>
                     <div class="audition__block">
-                        <div class="audition__proccess">1/10</div>
+                        <div class="audition__proccess"><span id="audition-process"></span>/<span
+                                id="audition-last"></span></div>
                         <div class="audition__block-content">
                             <div class="audition__block-content-border bordered">
                                 <div class="audition__block-top">
-                                    <div class="audition__text audition__item blurred">абракадабра</div>
+                                    <div class="audition__text audition__item blurred"></div>
                                     <a href="#" class="audition__start audition__item button">прослушать</a>
                                 </div>
                                 <div class="audition__block-middle">
@@ -29,10 +30,10 @@
                                 </div>
                                 <div class="audition__block-bottom">
                                     <a href="#" class="audition__btn audition__item button">
-                                        абракадабра
+
                                     </a>
                                     <a href="#" class="audition__btn audition__item button">
-                                        шляпа
+
                                     </a>
                                 </div>
                             </div>
@@ -50,16 +51,19 @@
                     <div class="result__title test-title">ваш результат</div>
                     <div class="result__block">
                         <div class="result__audition-title result__block-title result__audition-title-1">количество
-                            правильных ответов:<span class="result__word-count-audition result__word-count">5/10</span>
+                            правильных ответов:<span class="result__word-count-audition result__word-count">
+                                <span id="resultTrueAudition"></span>/<span id="resultAllAudition"></span></span>
                         </div>
-                        <div class="result__answer green">*поздравляем, это хороший результат*</div>
+                        <div class="result__answer"><span id="resultTrueText"></span></div>
                     </div>
                     <div class="result__buttons">
-                        <a href="../" class="result__btn button">вернуться к выбору</a>
+                        <a href="{% url 'learn_navigations' %}" class="result__btn button">вернуться к выбору</a>
                         <a href="#" class="result__btn result__try button">попробовать еще раз</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+      <script src="{% static '/js/audition.js' %}"></script>
 {% endblock content %}

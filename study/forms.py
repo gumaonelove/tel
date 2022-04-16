@@ -1,18 +1,9 @@
 from django import forms
-from django.contrib import admin
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-from .models import Text
+from .models import Image
 
 
-class TextsForm(forms.ModelForm):
-    '''Текстовый редактор для форматирования текста'''
-    text_html = forms.CharField(widget=CKEditorUploadingWidget(), label='Текст с форматированием')
-
+class ImageForm(forms.ModelForm):
     class Meta:
-        model = Text
-        fields = '__all__'
-
-
-class TextsAdmin(admin.ModelAdmin):
-    form = TextsForm
+        model = Image
+        fields = ['img']

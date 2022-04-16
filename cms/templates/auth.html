@@ -1,7 +1,6 @@
 {% extends 'main_page.html' %}
 {% load static %}
 {% block content %}
-    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
     <div class="auth" id="auth">
         <div class="auth-window" id="auth-window">
             <div class="choose-method">
@@ -32,77 +31,76 @@
             window.onload = () => {
                 var action = 'вход';
 
-            function setHeight() {
-                const auth = document.getElementById("auth");
-                const nav = document.getElementById("main-nav")
-                const screenHeight = document.documentElement.clientHeight;
-                auth.style.height = `${screenHeight - nav.getBoundingClientRect().height}px`;
-            }
+                function setHeight() {
+                    const auth = document.getElementById("auth");
+                    const nav = document.getElementById("main-nav")
+                    const screenHeight = document.documentElement.clientHeight;
+                    auth.style.height = `${screenHeight - nav.getBoundingClientRect().height}px`;
+                }
 
-            function setPosition() {
-                const authWindow = document.getElementById("auth-window");
-                const screenHeight = document.documentElement.clientHeight;
-                const footer = document.getElementById("footer")
-                authWindow.style.top = (screenHeight - authWindow.getBoundingClientRect().height - footer.getBoundingClientRect().height) / 2 + "px";
-            }
+                function setPosition() {
+                    const authWindow = document.getElementById("auth-window");
+                    const screenHeight = document.documentElement.clientHeight;
+                    const footer = document.getElementById("footer")
+                    authWindow.style.top = (screenHeight - authWindow.getBoundingClientRect().height - footer.getBoundingClientRect().height) / 2 + "px";
+                }
 
-            setHeight();
-            setPosition();
-
-            window.addEventListener("resize", setHeight);
-            window.addEventListener("resize", setPosition);
-
-            const enterBtn = document.getElementById("enter");
-            const registerBtn = document.getElementById("register");
-            const confirm = document.getElementById("confirm-password");
-            const submitBtn = document.getElementById("submit-btn");
-
-            enterBtn.addEventListener("click", () => {
-                registerBtn.classList.remove("method-btn-active");
-                enterBtn.classList.add("method-btn-active");
-                confirm.style.display = "none";
-                submitBtn.textContent = "вход";
-                action = 'вход';
+                setHeight();
                 setPosition();
-            });
-            registerBtn.addEventListener("click", () => {
-                enterBtn.classList.remove("method-btn-active");
-                registerBtn.classList.add("method-btn-active");
-                confirm.style.display = "block";
-                submitBtn.textContent = "регистрация";
-                action = 'регистрация';
-                setPosition();
-            });
 
-            submitBtn.addEventListener("click", sendForm);
+                window.addEventListener("resize", setHeight);
+                window.addEventListener("resize", setPosition);
 
-            function sendForm() {
-                var username = document.getElementById('login').value;
-                var firstPas = document.getElementById('first_pas').value;
-                var secPas = document.getElementById('sec_pas').value;
-                var data = {};
+                const enterBtn = document.getElementById("enter");
+                const registerBtn = document.getElementById("register");
+                const confirm = document.getElementById("confirm-password");
+                const submitBtn = document.getElementById("submit-btn");
 
-                data['username'] = username;
-                data['password'] = firstPas;
+                enterBtn.addEventListener("click", () => {
+                    registerBtn.classList.remove("method-btn-active");
+                    enterBtn.classList.add("method-btn-active");
+                    confirm.style.display = "none";
+                    submitBtn.textContent = "вход";
+                    action = 'вход';
+                    setPosition();
+                });
+                registerBtn.addEventListener("click", () => {
+                    enterBtn.classList.remove("method-btn-active");
+                    registerBtn.classList.add("method-btn-active");
+                    confirm.style.display = "block";
+                    submitBtn.textContent = "регистрация";
+                    action = 'регистрация';
+                    setPosition();
+                });
 
-                if (action == 'вход') {
-                    data['action'] = 'entry'
-                } else {
-                    data['action'] = 'register';
-                    if (firstPas != secPas) {
-                        alert('Пароли не совпадают')
+                submitBtn.addEventListener("click", sendForm);
+
+                function sendForm() {
+                    var username = document.getElementById('login').value;
+                    var firstPas = document.getElementById('first_pas').value;
+                    var secPas = document.getElementById('sec_pas').value;
+                    var data = {};
+
+                    data['username'] = username;
+                    data['password'] = firstPas;
+
+                    if (action == 'вход') {
+                        data['action'] = 'entry';
+                        const url = "{% url 'auth' %}";
+                        const csrftoken = '{{ csrf_token }}';
+                        request(url, data, csrftoken);
+                        setTimeout(() => window.open("{% url 'learn_navigations' %}", '_self', false), 1000);
+                    } else {
+                        data['action'] = 'register';
+                        if (firstPas != secPas) {
+                            alert('Пароли не совпадают')
+                        }
+                        const url = "{% url 'auth' %}";
+                        const csrftoken = '{{ csrf_token }}';
+                        request(url, data, csrftoken);
+                        setTimeout(() => window.open("{% url 'profile' %}", '_self', false), 1000);
                     }
                 }
-                sendRequest(data)
-            }
-
-            async function sendRequest(data) {
-                const url = "{% url 'auth' %}";
-                const csrftoken = '{{ csrf_token }}';
-                request(url, data, csrftoken);
-
-                setTimeout(() => window.open("{% url 'learn_navigations' %}", '_self', false), 1000);
-            }
             }
         </script>
 

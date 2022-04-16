@@ -1903,15 +1903,17 @@ a {
   background: #fff;
   border: 1px solid #000;
   border-radius: 20px;
-  padding: 20px 40px;
+  padding: 20px 30px;
   font-size: 25px;
   line-height: 32px;
-  max-width: 250px;
+  max-width: 270px;
 }
 
 .profile__btn {
   background: #202020;
   color: #fff;
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .profile__img {

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
 from cms.models import Developer, ContentText
+from study.models import Student
 
 
 class MainPageView(View):
@@ -45,6 +46,10 @@ class LoginView(View):
             user = authenticate(username=username, password=password)
             login(request, user)
 
-            return redirect('/study/learn_navigations/')
+            new_student = Student()
+            new_student.user = new_user
+            new_student.save()
+
+            return redirect('/study/profile/')
 
         return render(request, 'main_page.html')  # Вход в систему
