@@ -14,3 +14,11 @@ npx create-react-app frontend
 cd ~/tatarby/frontend
 npm start
 
+
+sudo service nginx restart
+dhfbhdsbh74357y437fbhdsbhf47375
+sudo service supervisor start
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl status tatarby
+sudo supervisorctl restart tatarby
