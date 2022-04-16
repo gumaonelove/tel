@@ -1,6 +1,18 @@
 "use strict"
 
 // start gumaonelove script
+async function request_put(url, data, csrftoken) {
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(data),
+    });
+    const result = await response.text();
+    return result;
+}
 
 async function n() {
    function getArrayFromBackend(url){
@@ -47,12 +59,12 @@ function playAudio() {
 }
 
 let playButton = document.querySelector('.audition__start');
-playButton.addEventListener('click', (e) => {
+playButton && playButton.addEventListener('click', (e) => {
     e.preventDefault();
     playAudio();
 });
 
-let jsonFromBackend = await getArrayFromBackend('http://192.168.0.208:8000/study/get_words/');
+let jsonFromBackend = await getArrayFromBackend('http://127.0.0.1:8000/study/get_words/');
 let trueVariant = jsonFromBackend['true_words'];
 let otherVariant = jsonFromBackend['false_words'];
 let auditionBtn = document.querySelectorAll('.audition__btn');
@@ -111,7 +123,7 @@ function seeResults() {
             token = b[1];
         }
     }
-    let url = 'http://192.168.0.208:8000/study/audition/';
+    let url = 'http://127.0.0.1:8000/study/audition/';
     let data = {
         'userTrueVariants': userTrueVariants,
     };
@@ -127,10 +139,10 @@ function seeResults() {
 
 }
 
-auditionLast.innerHTML = trueVariant.length;
-auditionProcess.innerHTML = 1;
+auditionLast && (auditionLast.innerHTML = trueVariant.length);
+auditionProcess && (auditionProcess.innerHTML = 1);
 
-nextElem.addEventListener('click', (e) => {
+nextElem && nextElem.addEventListener('click', (e) => {
     e.preventDefault();
     globalCount += 1;
     updateBtns();
@@ -161,11 +173,35 @@ resultTry.addEventListener('click', (e) => {
 
 function updateBtns() {
     let randNumber = getRandomInRange(0, 1);
-    auditionBtn[randNumber].innerHTML = trueVariant[globalCount];
+    if (auditionBtn[randNumber]) {
+        auditionBtn[randNumber].innerHTML = trueVariant[globalCount];
     auditionBtn[1 - randNumber].innerHTML = otherVariant[globalCount];
     auditionText.innerHTML = trueVariant[globalCount];
+    }
 }
 
 updateBtns();
 }
 n();
+window.addEventListener('load', () => {
+    const button = document.querySelector("#restart")
+    button && button.addEventListener('click', (e) => {
+        e.preventDefault();
+        var a = document.cookie.split(';');
+        var token = '';
+        for (let i = 0; i < a.length; i++) {
+            var b = a[i].split('=');
+            b[0] = b[0].replace(/\s+/g, '');
+            if (b[0] === 'csrftoken') {
+                token = b[1];
+            }
+        }
+        let url = 'http://127.0.0.1:8000/study/audition/';
+        let data = {
+            'status': 'restart'
+        };
+        request_put(url, data, token);
+        setTimeout(() => window.location.reload(), 1000);
+    })
+});
+

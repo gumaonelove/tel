@@ -45,7 +45,23 @@
                         </div>
                     </div>
                     {% else %}
-                        <div class="audition__title test-title">Поздравляю <br> Вы выучили все слова</div>
+                        <div class="audition__title test-title">поздравляю <br> все слова изучены</div>
+                        <div class="result__block">
+                        <div class="result__audition-title result__block-title result__audition-title-1" 
+                             style="text-align: center;">
+                            вы выиграли өчпочмак
+                            <br>
+                            <img src="{% static '/img/ochpoch.png' %}" style="margin-top: 40px;">
+                            <br>
+                            <a href="#" class="result__btn button"
+                               style="margin-top: 40px; display: inline-block;"
+                               id="restart">
+                                начать заново
+                            </a>
+
+                        </div>
+                        <div class="result__answer"><span id="resultTrueText"></span></div>
+                    </div>
                     {% endif %}
                 </div>
             </div>

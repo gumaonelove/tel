@@ -1,6 +1,7 @@
 import random
 from json import loads
 
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 
@@ -87,6 +88,21 @@ class AuditionView(View):
                 student.words.add(new_learned_word)
 
             return redirect('/study/audition/')
+        else:
+            return redirect('/')
+
+    def put(self, request):
+        if request.user.is_authenticated:
+            status = loads(request.body)['status']
+
+            if status == 'restart':
+                student = Student.objects.get(user=request.user)
+
+                student.words.clear()
+                student.save()
+                return JsonResponse({}) # to audition
+            else:
+                return redirect('/')
         else:
             return redirect('/')
 

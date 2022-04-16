@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="wrapper learn-section learn-section-chatbot">
-         <div class="crumbs">
+        <div class="crumbs">
             <div class="crumbs__container container">
                 <a href="{% url 'learn_navigations' %}" class="crumbs__back">
                     <- вернуться к выбору</a>
@@ -26,51 +26,26 @@
                     </div>
                     <div class="chatbot__block-middle">
                         <div class="chatbot__item left">
-                            <span>привет! как твои дела?
-                                напиши мне что-нибудь
-                                (на татарском)</span>
+                            <span>Сәлам! Эшләрең ничек? Миңа берәр нәрсә яз.</span>
                         </div>
-                        <div class="chatbot__item right">
+                        <!-- <div class="chatbot__item right">
                             <span>есть два стула...</span>
                         </div>
                         <div class="chatbot__item left">
                             <span>ой ну не начинай</span>
-                        </div>
-                        <div class="chatbot__item left">
-                            <span>ой ну не начинай</span>
-                        </div>
-                        <div class="chatbot__item left">
-                            <span>ой ну не начинай</span>
-                        </div>
-                        <div class="chatbot__item left">
-                            <span>ой ну не начинай</span>
-                        </div>
-                        <div class="chatbot__item left">
-                            <span>ой ну не начинай</span>
-                        </div>
-                        <div class="chatbot__item right">
-                            <span>есть два стула...</span>
-                        </div>
-                        <div class="chatbot__item right">
-                            <span>есть два стула...</span>
-                        </div>
-                        <div class="chatbot__item right">
-                            <span>есть два стула...</span>
-                        </div>
-                        <div class="chatbot__item right">
-                            <span>есть два стула...</span>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="chatbot__block-aside chatbot__block-bottom">
                         <div class="chatbot__block-aside-content-bottom">
-                            <form class="chatbot__block-form">
-                                <input type="text" placeholder="введите свое сообщение здесь...">
-                                <button type="submit"><img src="{% static '/icons/send.svg' %}" alt="send"></button>
-                            </form>
+                            <div class="chatbot__block-form">
+                                <input type="text" placeholder="введите свое сообщение здесь..." id="message-input">
+                                <button type="submit" id="submit-btn"><img src="{% static '/icons/send.svg' %}" alt="send"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="{% static '/js/chatbot.js' %}"></script>
 {% endblock content %}

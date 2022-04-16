@@ -15,7 +15,7 @@
     <script src="https://kit.fontawesome.com/7d0ca4e7f5.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="for-auth">
 <nav class="main-nav" id="main-nav">
     <div class="main-nav__container container">
         <a href="/" class="main-nav__logo">TatLearn</a>
@@ -51,36 +51,10 @@
         <button class="submit-btn" id="submit-btn">вход</button>
     </div>
 </div>
-<footer class="footer" id="footer">
-    <div class="footer__container container">
-        <p class="footer-copyright">copyright internationaldudes {{ year }}</p>
-        <p class="footer-contacts">contact us:<br/>{{ phone }}/{{ email }}</p>
-    </div>
-</footer>
 <script src="{% static 'js/request.js' %}"></script>
 <script>
     window.onload = () => {
         var action = 'вход';
-
-        function setHeight() {
-            const auth = document.getElementById("auth");
-            const nav = document.getElementById("main-nav");
-            const screenHeight = document.documentElement.clientHeight;
-            auth.style.height = `${screenHeight - nav.getBoundingClientRect().height}px`;
-                }
-
-                function setPosition() {
-                    const authWindow = document.getElementById("auth-window");
-                    const screenHeight = document.documentElement.clientHeight;
-                    const footer = document.getElementById("footer")
-                    authWindow.style.top = (screenHeight - authWindow.getBoundingClientRect().height - footer.getBoundingClientRect().height) / 2 + "px";
-                }
-
-                setHeight();
-                setPosition();
-
-                window.addEventListener("resize", setHeight);
-                window.addEventListener("resize", setPosition);
 
                 const enterBtn = document.getElementById("enter");
                 const registerBtn = document.getElementById("register");
@@ -93,7 +67,6 @@
                     confirm.style.display = "none";
                     submitBtn.textContent = "вход";
                     action = 'вход';
-                    setPosition();
                 });
                 registerBtn.addEventListener("click", () => {
                     enterBtn.classList.remove("method-btn-active");
@@ -101,7 +74,6 @@
                     confirm.style.display = "block";
                     submitBtn.textContent = "регистрация";
                     action = 'регистрация';
-                    setPosition();
                 });
 
                 submitBtn.addEventListener("click", sendForm);

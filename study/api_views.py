@@ -41,10 +41,10 @@ class GetWordsForAuditionApi(View):
             answer_words = list(words - learned_words)
             tatar_true, tatar_false = [], []
 
-            for index in range(2, (2 * len(answer_words) + 1) // 2 , 2):
+            for index in range(1, (2 * len(answer_words) + 1) // 2 , 2):
                 tatar_true.append(answer_words[index])
                 tatar_false.append(answer_words[index - 1])
-                if len(tatar_true) <= 10: break
+                if len(tatar_true) == 10: break
 
             context = {
                 'true_words': tatar_true,

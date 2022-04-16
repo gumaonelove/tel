@@ -2,6 +2,10 @@ input:active, input:focus {
     outline: none;
 }
 
+body.for-auth {
+    min-height: 100vh;
+}
+
 .auth {
     background-image: url("../img/header-bg.jpg");
     background-position: center center;
@@ -10,6 +14,16 @@ input:active, input:focus {
     position: relative;
     box-sizing: border-box;
     padding-left: 10%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+@media(max-width: 575px) {
+    .auth {
+        padding-left: 0;
+        padding: 30px 20px 70px;
+    }
 }
 
 .logo {
@@ -29,6 +43,13 @@ input:active, input:focus {
     left: auto;
 }
 
+@media(max-width: 575px) {
+    .auth-window {
+        position: relative;
+    }
+
+}
+
 .method-btn {
     font-size: 20px;
     color: #000;
@@ -38,6 +59,12 @@ input:active, input:focus {
     padding: 5px 10px;
     border: 1px solid #000;
     border-radius: 10px;
+}
+
+@media(max-width: 575px) {
+    .method-btn {
+        margin-bottom: 20px;
+    }
 }
 
 .method-btn-active {
@@ -55,6 +82,13 @@ input:active, input:focus {
     width: 350px;
     margin-top: 5px;
     background-color: transparent;
+}
+
+@media(max-width: 575px) {
+    .main-input {
+        width: 100%;
+    }
+
 }
 
 .input-block {
@@ -82,6 +116,12 @@ input:active, input:focus {
     display: flex;
     width: 100%;
     justify-content: space-between;
+}
+
+@media(max-width: 575px) {
+    .choose-method {
+        flex-direction: column;
+    }
 }
 
 .confirm-password {
