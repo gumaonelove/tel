@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 
-from .models import Student, Texts
+from .models import Student, Text
 
 
 class LearnView(View):
@@ -22,7 +22,7 @@ class ReadingView(View):
         if request.user.is_authenticated:
             student = Student.objects.get(user=request.user)
             student_texts = student.texts.all()
-            texts = Texts.objects.all()
+            texts = Text.objects.all()
             king_of_the_reading = False
 
             not_reading_texts = []
@@ -71,5 +71,30 @@ class SyntaxView(View):
                 'student': Student.objects.get(user=request.user)
             }
             return render(request, 'syntax.html', context)
+        else:
+            return redirect('/')
+
+
+class ChatbotView(View):
+    '''Чат бот'''
+    def get(self, request):
+        if request.user.is_authenticated:
+            context = {
+                'student': Student.objects.get(user=request.user)
+            }
+            return render(request, 'chatbot.html', context)
+        else:
+            return redirect('/')
+
+
+class PersonalCabView(View):
+    '''Личный кабинет'''
+
+    def get(self, request):
+        if request.user.is_authenticated:
+            context = {
+                'student': Student.objects.get(user=request.user)
+            }
+            return render(request, 'personal_cab.html', context)
         else:
             return redirect('/')

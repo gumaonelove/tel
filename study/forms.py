@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-from .models import Texts
+from .models import Text
 
 
 class TextsForm(forms.ModelForm):
@@ -10,7 +10,7 @@ class TextsForm(forms.ModelForm):
     text_html = forms.CharField(widget=CKEditorUploadingWidget(), label='Текст с форматированием')
 
     class Meta:
-        model = Texts
+        model = Text
         fields = '__all__'
 
 

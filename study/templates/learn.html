@@ -20,7 +20,7 @@
             <div class="header-learn__title">обучающий портал</div>
             <div class="header-learn__info">
                 <div class="header-learn__name">{{ student.get_sn }}</div>
-                <a href="#" class="header-learn__avatar">
+                <a href="{% url 'profile' %}" class="header-learn__avatar">
                     <img src="{{ student.photo.url }}" alt="{{ student.get_sn }}">
                 </a>
             </div>
@@ -42,7 +42,7 @@
                             <span>аудирование - проверка знаний слов</span>
                             <div class="learn__img"><img src="{% static '/icons/icon-2.svg' %}" alt="2"></div>
                         </a>
-                        <a href="#" class="learn__item">
+                        <a href="{% url 'chatbot' %}" class="learn__item">
                             <span>чат-бот на татарском</span>
                             <div class="learn__img"><img src="{% static '/icons/icon-3.svg' %}" alt="3"></div>
                         </a>

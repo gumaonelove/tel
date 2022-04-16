@@ -1,38 +1,63 @@
 {% extends 'learn.html' %}
 {% load static %}
 {% block content %}
-    <div class="wrapper learn-section learn-section-reading">
+    <div class="wrapper learn-section learn-section-syntax">
         <div class="crumbs">
             <div class="crumbs__container container">
                 <a href="{% url 'learn_navigations' %}" class="crumbs__back">
                     <- вернуться к выбору</a>
             </div>
         </div>
-        <div class="reading active">
-            <div class="reading__container container">
-                <div class="reading__content test-content">
-                    <div class="reading__title test-title">тест на чтение</div>
-                    <div class="reading__subtitle test-subtitle">вам нужно за максимально короткое время отчетливо
-                        прочитать приведенный ниже текст
-                        для выполнения задания нужно разрешить доступ к микрофону</div>
-
+        <div class="syntax active">
+            <div class="syntax__container container">
+                <div class="syntax__content test-content">
+                    <div class="syntax__title test-title">синтаксис - составление предложений</div>
+                    <div class="syntax__subtitle test-subtitle">
+                        здесь вам нужно расставить слова в таком порядке, чтобы получилось корректное предложение
+                    </div>
+                    <div class="syntax__block">
+                        <div class="syntax__block-top">
+                            <div class="syntax__block-top-items syntax__block-items">
+                                <div class="syntax__block-top-item syntax__block-item"></div>
+                                <div class="syntax__block-top-item syntax__block-item"></div>
+                                <div class="syntax__block-top-item syntax__block-item"></div>
+                                <div class="syntax__block-top-item syntax__block-item"></div>
+                                <div class="syntax__block-top-item syntax__block-item"></div>
+                            </div>
+                        </div>
+                        <div class="syntax__block-bottom">
+                            <div class="syntax__block-bottom-items syntax__block-items">
+                                <div class="syntax__block-bottom-item active syntax__block-item">абракадабра</div>
+                                <div class="syntax__block-bottom-item active syntax__block-item">абракадабра</div>
+                                <div class="syntax__block-bottom-item active syntax__block-item">абракадабра</div>
+                                <div class="syntax__block-bottom-item active syntax__block-item">абракадабра</div>
+                                <div class="syntax__block-bottom-item active syntax__block-item">абракадабра</div>
+                            </div>
+                        </div>
+                        <div class="syntax__button"><a href="#" class="syntax__check button">проверить</a></div>
+                    </div>
+                    <div class="syntax__descr">* перетащите слова в нижнем ряду на нужное место в верхнем ряду, чтобы
+                        получилось предложение</div>
                 </div>
             </div>
         </div>
-        <div class="result result__reading">
+        <div class="result result__syntax ">
             <div class="result__container container">
                 <div class="result__content test-content">
                     <div class="result__title test-title">ваш результат</div>
                     <div class="result__block">
-                        <div class="result__reading-title result__block-title result__reading-title-1">количество слов в
-                            минуту: <span class="result__word-count-reading result__word-count">777</span></div>
-                        <div class="result__reading-title result__block-title result__reading-title-2">процент
-                            корректного произношения:
-                            <span class="result__correct-count-reading result__correct-count">80%</span>
+                        <div class="result__syntax-title result__block-title result__syntax-title-1">
+                            ваше предложение - <span id="yourVariantSyntax">Абракадабра абракадабра абракадабра</span>
                         </div>
-                        <div class="result__answer green">*поздравляем, это хороший результат*</div>
+                        <div class="result__syntax-title result__block-title result__syntax-title-2">
+                            правильный вариант - <span id="trueVariantSyntax">Абракадабра абракадабра абракадабра</span>
+                        </div>
+                        <div class="result__answer green">поздравляем, вы все сделали правильно!</div>
                     </div>
-                    <a href="../" class="result__btn button">вернуться к выбору</a>
+                    <div class="result__buttons">
+                        <a href="../" class="result__btn button">вернуться к выбору</a>
+                        <a href="#" class="result__btn result__try button">попробовать еще раз</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TatLearn</title>
+    <link rel="shortcut icon" href="{% static '/icons/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <script src="https://kit.fontawesome.com/7d0ca4e7f5.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="header-learn">
+        <div class="header-learn__container container">
+            <div class="header-learn__menu">
+                <div class="header-learn__title">личный кабинет</div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper learn-section">
+        <div class="profile">
+            <div class="profile__container container">
+                <div class="profile__content">
+                    <div class="profile__title">{{ student.get_sn }}</div>
+                    <div class="crumbs">
+                        <div class="crumbs__container container">
+                            <a href="{% url 'learn_navigations' %}" class="crumbs__back">
+                                <- вернуться к обучению </a>
+                        </div>
+                    </div>
+                    <div class="profile__block">
+                        <div class="profile__left">
+                            <form class="profile__form">
+                                <div class="profile__input">
+                                    <label for="profileName">имя</label>
+                                    <input type="text" id="profileName" value="Иван">
+                                </div>
+                                <div class="profile__input">
+                                    <label for="profileLastname">фамилия</label>
+                                    <input type="text" id="profileLastname" value="Иванов">
+                                </div>
+                                <div class="profile__input">
+                                    <label for="profilePatronymic">отчество</label>
+                                    <input type="text" id="profilePatronymic" value="Иванович">
+                                </div>
+                                <div class="profile__input">
+                                    <label for="profileDateOfBirth">дата рождения</label>
+                                    <input type="text" id="profileDateOfBirth" value="03.07.2003">
+                                </div>
+                                <div class="profile__input">
+                                    <label></label>
+                                    <a href="#" class="profile__btn button">поменять фотографию</a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="profile__right">
+                            <div class="profile__img">
+                                <img src="{{ student.photo.url }}" alt="ildar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="{% static '/js/script.js' %}"></script>
+</body>
+
+</html>

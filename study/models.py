@@ -18,7 +18,8 @@ class Student(models.Model):
 
     rang = models.FloatField(verbose_name='Ранг пользователя', default=0)
 
-    texts = models.ManyToManyField('Texts', verbose_name='Текста прочитанные пользователем', null=True, blank=True)
+    texts = models.ManyToManyField('Text', verbose_name='Текста прочитанные пользователем', null=True, blank=True)
+    words = models.ManyToManyField('Word', verbose_name='Слова изученные пользователем', null=True, blank=True)
 
     def get_full_name(self):
         return f'{self.surname} {self.name} {self.lastname}'
@@ -30,7 +31,7 @@ class Student(models.Model):
         return f'Пользователь - {self.id} - {self.get_full_name()}'
 
 
-class Texts(models.Model):
+class Text(models.Model):
     '''Текст для чтения'''
     title = models.TextField(verbose_name='Название текста')
     text_html = models.TextField(verbose_name='Текст с форматированием')
@@ -39,3 +40,11 @@ class Texts(models.Model):
     def __str__(self):
         return f'Текст для чтения - {self.title}'
 
+
+class Word(models.Model):
+    '''Слова для изучения'''
+    tatar = models.CharField(verbose_name='Слово на татарском', max_length=30)
+    rus = models.CharField(verbose_name='Слово на русском', max_length=30)
+
+    def __str__(self):
+        return f'Слово - {self.rus}'

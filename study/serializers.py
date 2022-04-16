@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Student, Texts
+from .models import Student, Text
 
 
 class UserSerializer(serializers.Serializer):
@@ -23,5 +23,5 @@ class TextSerializer(serializers.HyperlinkedModelSerializer):
     '''Модель Текстов'''
 
     class Meta:
-        model = Texts
+        model = Text
         fields = '__all__'
