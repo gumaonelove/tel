@@ -101,7 +101,7 @@
                 const csrftoken = '{{ csrf_token }}';
                 request(url, data, csrftoken);
 
-                setTimeout(() => window.open("{% url 'learn_navigations' %}", '_self', false), 500);
+                setTimeout(() => window.open("{% url 'learn_navigations' %}", '_self', false), 1000);
             }
             }
         </script>
