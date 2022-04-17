@@ -68,6 +68,7 @@ server{
 sudo systemctl start dialo
 sudo systemctl enable dialo
 sudo systemctl status dialo
+sudo systemctl kill dialo
 
 sudo nano /etc/nginx/sites-available/default
 
