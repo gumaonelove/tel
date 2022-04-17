@@ -2,11 +2,19 @@ window.onload = () => {
   const submit = document.querySelector("#submit-btn");
   const input = document.querySelector("#message-input");
   const messages = [];
-  submit.addEventListener("click", async () => {
+  document.addEventListener("keydown", (e) => {
+    if (e.key == "Enter" && input == document.activeElement) {
+      f();
+    }
+  });
+  submit.addEventListener("click", () => {
+    f();
+  });
+  async function f() {
     if (input.value) {
       createOwnMessage(input.value);
-
       messages.push(input.value);
+      input.value = "";
       const json = {
         messages,
       };
@@ -17,9 +25,8 @@ window.onload = () => {
       });
       const res = await response.json();
       createRespondedMessage(res.output);
-      input.value = "";
     }
-  });
+  }
 };
 
 function createOwnMessage(string) {

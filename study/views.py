@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 
-from .models import Student, Text, Word, LearnWords, Sentence
+from .models import Student, Text, Word, LearnWords, Sentence, ReadText, BuildSentence
 from .forms import ImageForm
 
 
@@ -53,6 +53,27 @@ class ReadingView(View):
         else:
             return redirect('/')
 
+    def post(self, request):
+        if request.user.is_authenticated:
+            student = Student.objects.get(user=request.user)
+
+            text_id = loads(request.body)['text_id']
+
+            score = loads(request.body)['score']
+
+            read_text = Text.objects.get(id=text_id)
+            new_read_text = ReadText()
+            new_read_text.text = read_text
+            new_read_text.rang = int(score)/100
+            new_read_text.student = student
+            new_read_text.save()
+
+            student.texts.add(new_read_text)
+
+            return redirect('/study/reading/')
+        else:
+            return redirect('/')
+
 
 class AuditionView(View):
     '''Аудирование'''
@@ -79,7 +100,7 @@ class AuditionView(View):
             user_true_variants = loads(request.body)['userTrueVariants']
 
             for text_word in user_true_variants:
-                true_word = Word.objects.get(tatar=text_word)
+                true_word = Word.objects.get(rus=text_word)
                 new_learned_word = LearnWords()
                 new_learned_word.word = true_word
                 new_learned_word.student = student
@@ -112,19 +133,44 @@ class SyntaxView(View):
     def get(self, request):
         if request.user.is_authenticated:
             student = Student.objects.get(user=request.user)
-            sentences = Sentence.objects.all()
 
-            sentence_list = []
+            buildSentences_qs, sentences_qs = student.sentence.all(), Sentence.objects.all()
+            sentences_set, buildSentences_set = set(), set()
 
-            for sentence in sentences:
-                sentence_list.append(sentence.text)
+            for sentence in sentences_qs:
+                sentences_set.add(sentence)
+
+            for buildSentence in buildSentences_qs:
+                buildSentences_set.add(buildSentence.sentence)
+
+            sentence_list = list(sentences_set - buildSentences_set)
 
             random_index = random.randint(0, len(sentence_list) - 1)
+
             context = {
                 'student': student,
-                'sentence': sentence_list[random_index]
+                'sentence': sentence_list[random_index],
             }
             return render(request, 'syntax.html', context)
+        else:
+            return redirect('/')
+
+    def post(self, request):
+        if request.user.is_authenticated:
+            student = Student.objects.get(user=request.user)
+
+            sentence_id = loads(request.body)['sentence_id']
+
+            sentence = Sentence.objects.get(id=sentence_id)
+
+            new_build_sentence = BuildSentence()
+            new_build_sentence.sentence = sentence
+            new_build_sentence.student = student
+            new_build_sentence.save()
+
+            student.sentence.add(new_build_sentence)
+
+            return redirect('/study/reading/')
         else:
             return redirect('/')
 

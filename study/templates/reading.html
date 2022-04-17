@@ -1,140 +1,172 @@
 {% extends 'learn.html' %}
 {% load static %}
 {% block content %}
-    <div class="wrapper learn-section learn-section-reading">
-        <div class="crumbs">
-            <div class="crumbs__container container">
-                <a href="{% url 'learn_navigations' %}" class="crumbs__back">
-                    <- вернуться к выбору</a>
-            </div>
+<div class="wrapper learn-section learn-section-reading">
+    <div class="crumbs">
+        <div class="crumbs__container container">
+            <a href="{% url 'learn_navigations' %}" class="crumbs__back">
+                <- вернуться к выбору</a>
         </div>
-        <div class="reading active">
-            <div class="reading__container container">
-                <div class="reading__content test-content">
-                    <div class="reading__title test-title">тест на чтение</div>
-                    <div class="reading__subtitle test-subtitle">вам нужно за максимально короткое время отчетливо
-                        прочитать приведенный ниже текст
-                        для выполнения задания нужно разрешить доступ к микрофону</div>
-                    <div class="reading__block">
-                        <div class="reading__left">
-                            <p class="reading__descr blurred"></p>
-                        </div>
-                        <div class="reading__right">
-                            <a href="#" class="reading__btn button start active" id="test_btn">Начать тест</a>
-                            <a href="#" class="reading__btn button play" id="record_btn">
-                                <span class="reading__btn-timer">00:00</span>
-                                <span class="reading__btn-text">Закончить запись</span>
-                            </a>
-                        </div>
+    </div>
+    <div class="reading active">
+        <div class="reading__container container">
+            <div class="reading__content test-content">
+                <div class="reading__title test-title">тест на чтение</div>
+                <div class="reading__subtitle test-subtitle">вам нужно за максимально короткое время отчетливо
+                    прочитать приведенный ниже текст
+                    для выполнения задания нужно разрешить доступ к микрофону</div>
+                <div class="reading__block">
+                    <div class="reading__left">
+                        <p class="reading__descr blurred"></p>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="result result__reading">
-            <div class="result__container container">
-                <div class="result__content test-content">
-                    <div class="result__title test-title">ваш результат</div>
-                    <div class="result__block">
-                        <div class="result__reading-title result__block-title result__reading-title-1">количество слов в
-                            минуту: <span class="result__word-count-reading result__word-count">загрузка...</span></div>
-                        <div class="result__reading-title result__block-title result__reading-title-2">процент
-                            корректного произношения:
-                            <span class="result__correct-count-reading result__correct-count">загрузка...</span>
-                        </div>
-                        <div class="result__answer green">*поздравляем, это хороший результат*</div>
+                    <div class="reading__right">
+                        <a href="#" class="reading__btn button start active" id="test_btn">Начать тест</a>
+                        <a href="#" class="reading__btn button play" id="record_btn">
+                            <span class="reading__btn-timer">00:00</span>
+                            <span class="reading__btn-text">Закончить запись</span>
+                        </a>
                     </div>
-                    <a href="{% url 'learn_navigations' %}" class="result__btn button">вернуться к выбору</a>
                 </div>
             </div>
         </div>
     </div>
+    <div class="result result__reading">
+        <div class="result__container container">
+            <div class="result__content test-content">
+                <div class="result__title test-title">ваш результат</div>
+                <div class="result__block">
+                    <div class="result__reading-title result__block-title result__reading-title-1">количество слов в
+                        минуту: <span class="result__word-count-reading result__word-count">загрузка...</span></div>
+                    <div class="result__reading-title result__block-title result__reading-title-2">процент
+                        корректного произношения:
+                        <span class="result__correct-count-reading result__correct-count">загрузка...</span>
+                    </div>
+                    <div class="result__answer">загрузка результата...</div>
+                </div>
+                <a href="{% url 'learn_navigations' %}" class="result__btn button">вернуться к выбору</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
-        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <script src="/static/js/script.js"></script>
-    <script src="/static/js/lib/WebAudioRecorder.js"></script>
-    <script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="{% static '/js/script.js' %}"></script>
+<script src="{% static '/js/lib/WebAudioRecorder.js' %}"></script>
+<script src="{% static '/js/request.js' %}"></script>
+<script>
     window.onload = () => {
-      let text = `{{ text.text }}`;
+        const p = document.querySelector(".reading__descr");
+        let text = `{{ text.text }}`;
+        p.innerText = text;
+        const testBtn = document.querySelector("#test_btn");
+        const recordBtn = document.querySelector("#record_btn");
+        const resultBlock = document.querySelector(".result-reading");
+        const timer = document.querySelector(".reading__btn-timer");
+        let resultAnswer = document.querySelector(".result__answer");
 
-      const p = document.querySelector(".reading__descr");
+        let interval, recorder;
+        let seconds = 0;
 
-      p.innerText = text;
-      const testBtn = document.querySelector("#test_btn");
-      const recordBtn = document.querySelector("#record_btn");
-      const resultBlock = document.querySelector(".result-reading");
-      const timer = document.querySelector(".reading__btn-timer");
+        testBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+                testBtn.classList.remove("active");
+                recordBtn.classList.add("active");
+                p.classList.remove("blurred");
+                interval = setInterval(() => {
+                    seconds++;
+                    let minutes = Math.trunc(seconds / 60);
+                    minutes = minutes > 9 ? String(minutes) : "0" + String(minutes);
+                    let restSeconds = seconds % 60;
+                    restSeconds =
+                        restSeconds > 9 ? String(restSeconds) : "0" + String(restSeconds);
+                    timer.innerHTML = `${minutes}:${restSeconds}`;
+                }, 1000);
+                let AudioContext = window.AudioContext || window.webkitAudioContext;
+                let audioContext = new AudioContext();
+                let source = audioContext.createMediaStreamSource(stream);
+                const webAudioRecorder = new WebAudioRecorder(source, {
+                    workerDir: "/static/js/lib/",
+                    encoding: "wav",
+                    numChannels: 1,
+                    options: {
+                        encodeAfterRecord: true,
+                    },
+                });
 
-      let interval, recorder;
-      let seconds = 0;
+                recorder = webAudioRecorder;
+                webAudioRecorder.onComplete = async (webAudioRecorder, blob) => {
+                    const fd = new FormData();
+                    fd.append("file", blob);
+                    text = text.toLowerCase();
+                    text = text
+                        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+                        .replace(/\s{2,}/g, " ");
+                    fd.append("text", text);
+                    const response = await fetch(
+                        "http://127.0.0.1:4000/rouge",
+                        {
+                            method: "POST",
+                            body: fd,
+                        }
+                    );
+                    const body = await response.json();
+                    let score = body.score.toFixed(1);
+                    if (score > 0.75) {
+                        let url = '{% url 'reading' %}';
+                        let data = {
+                            'text_id': `{{ text.id }}`,
+                            'score': Number(score * 100)
+                        };
+                        var a = document.cookie.split(';');
+                        var token = '';
+                        for (let i = 0; i < a.length; i++) {
+                            var b = a[i].split('=');
+                            b[0] = b[0].replace(/\s+/g, '');
+                            if (b[0] === 'csrftoken') {
+                                token = b[1];
+                            }
+                        }
 
-      testBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-        navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-          testBtn.classList.remove("active");
-          recordBtn.classList.add("active");
-          p.classList.remove("blurred");
-          interval = setInterval(() => {
-            seconds++;
-            let minutes = Math.trunc(seconds / 60);
-            minutes = minutes > 9 ? String(minutes) : "0" + String(minutes);
-            let restSeconds = seconds % 60;
-            restSeconds =
-              restSeconds > 9 ? String(restSeconds) : "0" + String(restSeconds);
-            timer.innerHTML = `${minutes}:${restSeconds}`;
-          }, 1000);
-          let AudioContext = window.AudioContext || window.webkitAudioContext;
-          let audioContext = new AudioContext();
-          let source = audioContext.createMediaStreamSource(stream);
-          const webAudioRecorder = new WebAudioRecorder(source, {
-            workerDir: "/static/js/lib/",
-            encoding: "wav",
-            numChannels: 1,
-            options: {
-              encodeAfterRecord: true,
-            },
-          });
+                        request(url, data, token);
 
-          recorder = webAudioRecorder;
-          webAudioRecorder.onComplete = async (webAudioRecorder, blob) => {
-            const fd = new FormData();
-            fd.append("file", blob);
-            text = text.toLowerCase();
-            text = text
-              .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
-              .replace(/\s{2,}/g, " ");
-            fd.append("text", text);
-            const response = await fetch(
-              "http://127.0.0.1:4000/rouge",
-              {
-                method: "POST",
-                body: fd,
-              }
-            );
-            const body = await response.json();
-            let score = body.score.toFixed(1);
-            score < 0 && (score = 0)
-            const recognised = body.text;
-            const speed = recognised.split(" ").length / (seconds / 60);
-            document.querySelector(".result__word-count").innerHTML = speed;
-            document.querySelector(".result__correct-count").innerHTML =
-              (score * 100).toFixed(1) + "%";
-          };
-          webAudioRecorder.onError = (webAudioRecorder, err) => {
-            console.error(err);
-          };
-          webAudioRecorder.startRecording();
+                    }
+                    score < 0 && (score = 0);
+                    const recognised = body.text;
+                    let speed = recognised.split(" ").length / (seconds / 60);
+                    if (score == 0){
+                        speed = 0;
+                    }
+                    document.querySelector(".result__word-count").innerHTML = speed;
+                    document.querySelector(".result__correct-count").innerHTML =
+                        (score * 100).toFixed(1) + "%";
+                    if ((score * 100).toFixed(1) >= 75) {
+                        resultAnswer.innerHTML = '*поздравляем, это хороший результат*';
+                        resultAnswer.classList.add('green');
+                    } else if ((score * 100).toFixed(1) > 50 && (score * 100).toFixed(1) < 75) {
+                        resultAnswer.innerHTML = '*у вас средний уровень*';
+                        resultAnswer.classList.add('orange');
+                    } else {
+                        resultAnswer.innerHTML = '*к сожалению, у вас низкий уровень :(*';
+                        resultAnswer.classList.add('red');
+                    }
+                };
+                webAudioRecorder.onError = (webAudioRecorder, err) => {
+                    console.error(err);
+                };
+                webAudioRecorder.startRecording();
+            });
         });
-      });
 
-      recordBtn.addEventListener("click", () => {
-        recorder.finishRecording();
-        clearInterval(interval);
-        document.querySelector(".reading").classList.remove("active");
-        document.querySelector(".result").classList.add("active");
-      });
+        recordBtn.addEventListener("click", () => {
+            recorder.finishRecording();
+            clearInterval(interval);
+            document.querySelector(".reading").classList.remove("active");
+            document.querySelector(".result").classList.add("active");
+        });
     };
-    </script>
+</script>
 {% endblock content %}

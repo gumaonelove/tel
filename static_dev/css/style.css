@@ -717,6 +717,11 @@ a {
   color: #19af00;
 }
 
+.orange {
+  color: orange;
+  opacity: .8;
+}
+
 .red {
   color: red;
   opacity: .8;
@@ -775,6 +780,25 @@ a {
 .filled {
   padding: 0 !important;
   background: rgba(0,0,0,0) !important;
+}
+
+#raitingStatus {
+  position: absolute;
+  opacity: 0;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  visibility: hidden;
+  z-index: -3;
+}
+
+#raitingBar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 0%;
+  background: gray;
 }
 
 .header {
@@ -909,6 +933,40 @@ a {
 .header-learn__avatar img {
   max-width: 100%;
   width: 100%;
+}
+
+.header-learn__raiting {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.header-learn__raiting-name {
+  margin-right: 20px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.header-learn__raiting-status {
+  min-width: 200px;
+  border-radius: 6px;
+  position: relative;
+  background: -webkit-gradient(linear, left top, right top, from(red), color-stop(50%, orange), to(green));
+  background: -o-linear-gradient(left, red 0%, orange 50%, green 100%);
+  background: linear-gradient(90deg, red 0%, orange 50%, green 100%);
+}
+
+.header-learn__raiting-status:after {
+  content: "Ваш уровень";
+  position: absolute;
+  bottom: -20px;
+  right: 0;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .main-nav {
@@ -2206,6 +2264,28 @@ a {
     margin-right: 20px;
   }
 
+  .header-learn__raiting {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: center;
+  }
+
+  .header-learn__raiting-name {
+    margin-right: 0;
+    margin-bottom: 5px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .header-learn__raiting-status {
+    min-height: 30px;
+  }
+
   .team {
     padding: 40px 0 60px;
   }
@@ -2427,6 +2507,21 @@ a {
 
   .header-learn__name {
     display: none;
+  }
+
+  .header-learn__raiting-name {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .header-learn__raiting-status {
+    min-width: 100px;
+  }
+
+  .header-learn__raiting-status:after {
+    font-size: 9px;
+    line-height: 11px;
+    bottom: -15px;
   }
 
   .main-nav__logo {

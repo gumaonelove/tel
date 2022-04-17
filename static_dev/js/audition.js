@@ -47,7 +47,7 @@ async function request(url, data, csrftoken) {
 let globalCount = 0;
 
 function pastAudioLink() {
-    const uri = `https://speech.tatar/synthesize_tatar_hack?text=${trueVariant[globalCount]}`;
+    const uri = `https://speech.tatar/synthesize_tatar_hack?text=${trueTatar[globalCount]}`;
     const encoded = encodeURI(uri);
     return encoded;
 }
@@ -65,8 +65,9 @@ playButton && playButton.addEventListener('click', (e) => {
 });
 
 let jsonFromBackend = await getArrayFromBackend('http://127.0.0.1:8000/study/get_words/');
-let trueVariant = jsonFromBackend['true_words'];
-let otherVariant = jsonFromBackend['false_words'];
+let trueVariant = jsonFromBackend['true_rus_words'];
+let otherVariant = jsonFromBackend['false_rus_words'];
+let trueTatar = jsonFromBackend['true_tatar_words'];
 let auditionBtn = document.querySelectorAll('.audition__btn');
 let auditionBlockBottom = document.querySelector('.audition__block-bottom');
 let auditionText = document.querySelector('.audition__text');
@@ -176,7 +177,7 @@ function updateBtns() {
     if (auditionBtn[randNumber]) {
         auditionBtn[randNumber].innerHTML = trueVariant[globalCount];
     auditionBtn[1 - randNumber].innerHTML = otherVariant[globalCount];
-    auditionText.innerHTML = trueVariant[globalCount];
+    auditionText.innerHTML = trueTatar[globalCount];
     }
 }
 

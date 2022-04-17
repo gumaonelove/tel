@@ -18,6 +18,12 @@
         <div class="header-learn__container container">
             <div class="header-learn__menu">
                 <div class="header-learn__title">личный кабинет</div>
+                <div class="header-learn__raiting">
+                    <div class="header-learn__raiting-name"></div>
+                    <div class="header-learn__raiting-status">
+                        <span id="raitingBar"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -112,11 +118,12 @@
             request_put(url, data, csrftoken);
         }
     </script>
-
-
-
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
-        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="{% static 'js/profile.js' %}"></script>
+    <script>
+        window.addEventListener('load', () => {
+        updateStatus({{ student.recals_rang }});
+        })
+    </script>
     <script src="{% static '/js/script.js' %}"></script>
 </body>
 

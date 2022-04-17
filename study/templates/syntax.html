@@ -54,6 +54,7 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/request.js' %}"></script>
     <script>
     let html2block = [];
 const block2 = document.querySelector(".syntax__block-bottom-items");
@@ -61,7 +62,7 @@ window.onload = () => {
   document.querySelector(".result__try").addEventListener("click", () => {
     window.location.reload();
   });
-  let s = '{{ sentence }}';
+  let s = '{{ sentence.text }}';
   let filledCounter = 0;
   let sentence = s.split(" ");
   let i = 1;
@@ -117,6 +118,20 @@ window.onload = () => {
           r.innerHTML = "неправильно, нужно учиться еще!";
           r.classList.remove("green");
           r.classList.add("red");
+        } else {
+            let url = '{% url "syntax" %}';
+            let data = {'sentence_id': `{{ sentence.id }}`};
+            var a = document.cookie.split(';');
+        var token = '';
+        for (let i = 0; i < a.length; i++) {
+            var b = a[i].split('=');
+            b[0] = b[0].replace(/\s+/g, '');
+            if (b[0] === 'csrftoken') {
+                token = b[1];
+            }
+        }
+        request(url, data, token);
+        setTimeout(() => window.location.reload(), 1000);
         }
       }
     }

@@ -39,16 +39,22 @@ class GetWordsForAuditionApi(View):
                 words.add(word.tatar)
 
             answer_words = list(words - learned_words)
-            tatar_true, tatar_false = [], []
+            tatar_true, false_rus_words, rus_true = [], [], []
 
             for index in range(1, (2 * len(answer_words) + 1) // 2 , 2):
                 tatar_true.append(answer_words[index])
-                tatar_false.append(answer_words[index - 1])
+
+                _word = Word.objects.get(tatar=answer_words[index])
+                rus_true.append(_word.rus)
+
+                _word_1 = Word.objects.get(tatar=answer_words[index - 1])
+                false_rus_words.append(_word_1.rus)
                 if len(tatar_true) == 10: break
 
             context = {
-                'true_words': tatar_true,
-                'false_words': tatar_false,
+                'true_tatar_words': tatar_true,
+                'false_rus_words': false_rus_words,
+                'true_rus_words': rus_true
             }
 
             return JsonResponse(context)

@@ -2,6 +2,9 @@ from django.db import models
 from django.conf import settings
 
 
+import math
+
+
 User = settings.AUTH_USER_MODEL
 
 
@@ -21,6 +24,8 @@ class Student(models.Model):
                                    null=True, blank=True, related_name='read_texts')
     words = models.ManyToManyField('LearnWords', verbose_name='Слова изученные пользователем',
                                    null=True, blank=True, related_name='learned_words')
+    sentence = models.ManyToManyField('BuildSentence', verbose_name='Предложения собранные пользователем',
+                                      null=True, blank=True, related_name='build_sentence')
 
     def get_full_name(self):
         return f'{self.surname} {self.name} {self.lastname}'
@@ -37,6 +42,10 @@ class Student(models.Model):
     def get_photo_url(self):
         return self.photo.img.url
 
+    def recals_rang(self):
+        _rang = self.words.count() * 0.02 + self.sentence.count() * 0.01 + self.texts.count() * 0.03
+        sigm = 1 / (1 + math.exp(-_rang))
+        return int(sigm * 100)
 
 class ReadText(models.Model):
     '''Прочитанный тексты'''
@@ -58,6 +67,17 @@ class LearnWords(models.Model):
 
     def __str__(self):
         return f'Слово {self.id}'
+
+
+class BuildSentence(models.Model):
+    '''Выученные слова'''
+
+    sentence = models.ForeignKey('Sentence', verbose_name='Предложение', on_delete=models.CASCADE)
+    data = models.DateField(verbose_name="Когда выучил слово", auto_now_add=True)
+    student = models.ForeignKey('Student', verbose_name='Пользователь', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Предложение {self.id}'
 
 
 class Text(models.Model):
