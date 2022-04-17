@@ -19,7 +19,7 @@ window.onload = () => {
         messages,
       };
       console.log(json);
-      const response = await fetch("http://127.0.0.1:5001/dialo", {
+      const response = await fetch("https://gumaonelove.ru:5005/dialo", {
         method: "POST",
         body: JSON.stringify(json),
       });

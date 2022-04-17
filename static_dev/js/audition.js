@@ -64,7 +64,7 @@ playButton && playButton.addEventListener('click', (e) => {
     playAudio();
 });
 
-let jsonFromBackend = await getArrayFromBackend('http://127.0.0.1:8000/study/get_words/');
+let jsonFromBackend = await getArrayFromBackend('https://gumaonelove.ru/study/get_words/');
 let trueVariant = jsonFromBackend['true_rus_words'];
 let otherVariant = jsonFromBackend['false_rus_words'];
 let trueTatar = jsonFromBackend['true_tatar_words'];
@@ -124,7 +124,7 @@ function seeResults() {
             token = b[1];
         }
     }
-    let url = 'http://127.0.0.1:8000/study/audition/';
+    let url = 'https://gumaonelove.ru/study/audition/';
     let data = {
         'userTrueVariants': userTrueVariants,
     };
@@ -197,7 +197,7 @@ window.addEventListener('load', () => {
                 token = b[1];
             }
         }
-        let url = 'http://127.0.0.1:8000/study/audition/';
+        let url = 'https://gumaonelove.ru/study/audition/';
         let data = {
             'status': 'restart'
         };
