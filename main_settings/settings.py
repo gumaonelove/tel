@@ -9,6 +9,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['80.78.241.26', '127.0.0.1', '192.168.0.208', '80.78.241.26', 'gumaonelove.ru']
 
+CSRF_TRUSTED_ORIGINS = ['https://*.gumaonelove.ru','https://*.127.0.0.1', 'https://gumaonelove.ru']
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
