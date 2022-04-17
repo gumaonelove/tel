@@ -61,3 +61,26 @@ server{
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 }
+
+
+/etc/systemd/system/dialo.service
+
+sudo systemctl start dialo
+sudo systemctl enable dialo
+sudo systemctl status dialo
+
+sudo nano /etc/nginx/sites-available/default
+
+server{
+    listen 4004 ssl;
+    ssl on;
+    ssl_certificate /etc/ssl/gumaonelove_ru.crt;
+    ssl_certificate_key /etc/ssl/gumaonelove_ru.key;
+    server_name gumaonelove.ru;
+    client_max_body_size 100M;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/gumaonelove/by_kirill/wsgi_dialo.sock;
+    }
+}

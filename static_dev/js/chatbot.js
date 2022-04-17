@@ -21,6 +21,10 @@ window.onload = () => {
       console.log(json);
       const response = await fetch("https://gumaonelove.ru:5005/dialo", {
         method: "POST",
+        headers:{
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Access-Control-Allow-Origin': '*'
+        },
         body: JSON.stringify(json),
       });
       const res = await response.json();
