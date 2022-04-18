@@ -47,6 +47,19 @@
             </div>
         </div>
     </div>
+    <div class="clean ">
+            <div class="clean__container container">
+                <div class="clean__title test-title">вы прочли все текста</div>
+                <div class="clean__content">
+                    <div class="clean__text">
+                        <span>поздравляем, теперь вы свободно можете разговаривать на татарском</span>
+                        <span>получайте кыстыбый</span>
+                    </div>
+                    <div class="clean__img"><img src="{% static '/img/kystyby.jpg'%}" alt="kystyby"></div>
+                    <a href="#" class="clean__btn button" id="cleanReading">пройти заново</a>
+                </div>
+            </div>
+        </div>
 </div>
 
 
@@ -107,7 +120,8 @@
                         .replace(/\s{2,}/g, " ");
                     fd.append("text", text);
                     const response = await fetch(
-                        "https://gumaonelove.ru:4004/rouge",
+                        //"https://gumaonelove.ru:4004/rouge",
+                        "http://127.0.0.1:4004/rouge",
                         {
                             method: "POST",
                             body: fd,
@@ -115,7 +129,7 @@
                     );
                     const body = await response.json();
                     let score = body.score.toFixed(1);
-                    if (score > 0.75) {
+                    if (score > 0.6) {
                         let url = '{% url 'reading' %}';
                         let data = {
                             'text_id': `{{ text.id }}`,

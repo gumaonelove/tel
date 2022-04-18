@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve dialo
+After=network.target
+
+[Service]
+User=gumaonelove
+Group=www-data
+WorkingDirectory=/home/gumaonelove/by_kirill
+Environment="PATH=/home/gumaonelove/venv/bin"
+ExecStart=/home/gumaonelove/venv/bin/gunicorn --workers 3 --bind unix:dialo.sock -m 007 wsgi_dialo:app
+
+[Install]
+WantedBy=multi-user.target

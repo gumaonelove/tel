@@ -43,7 +43,7 @@ class Student(models.Model):
         return self.photo.img.url
 
     def recals_rang(self):
-        _rang = self.words.count() * 0.02 + self.sentence.count() * 0.01 + self.texts.count() * 0.03
+        _rang = self.words.count() * 0.06 + self.sentence.count() * 0.04 + self.texts.count() * 0.1
         sigm = 1 / (1 + math.exp(-_rang))
         return int(sigm * 100)
 

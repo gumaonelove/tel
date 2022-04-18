@@ -73,7 +73,7 @@ sudo systemctl kill dialo
 sudo nano /etc/nginx/sites-available/default
 
 server{
-    listen 4004 ssl;
+    listen 5005 ssl;
     ssl on;
     ssl_certificate /etc/ssl/gumaonelove_ru.crt;
     ssl_certificate_key /etc/ssl/gumaonelove_ru.key;
