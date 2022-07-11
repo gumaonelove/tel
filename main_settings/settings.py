@@ -7,9 +7,10 @@ SECRET_KEY = 'django-insecure-@k_y%v+20k5(!kkl6epo6!kho^hywn&-dnzj=b(u&h%w$$2_cu
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['80.78.241.26', '127.0.0.1', '192.168.0.208', '80.78.241.26', 'gumaonelove.ru']
+#ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '151.248.122.169']
 
-CSRF_TRUSTED_ORIGINS = ['https://*.gumaonelove.ru','https://*.127.0.0.1', 'https://gumaonelove.ru']
+CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -110,8 +111,6 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]

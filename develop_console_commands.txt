@@ -1,19 +1,31 @@
-python3 -m venv ./env
-source env/bin/activate
+ssh root@151.248.122.169
+7y7:H7%fX3dU
+
+apt update;
+apt upgrade;
+adduser gumaonelove;
+hewbfhuebwuhebr34bfuyb3ub4bfwebdshewbahHHHHHsad
+
+apt install sudo;
+usermod -aG sudo gumaonelove;
+su gumaonelove;
+sudo apt install nginx git supervisor;
+
+python3 -V
+sudo apt-get install python3-venv
+python3 -m venv venv
 
 pip install -r req.txt
 
+https://github.com/gumaonelove/tatarby.git
 
 python manage.py collectstatic
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 
-npx create-react-app frontend
-
-cd ~/tatarby/frontend
-npm start
-
+python flask_net.py
+python dialo.py
 
 sudo service nginx restart
 dhfbhdsbh74357y437fbhdsbhf47375
@@ -23,26 +35,12 @@ sudo supervisorctl update
 sudo supervisorctl status tatarby
 sudo supervisorctl restart tatarby
 
+sudo nano /etc/nginx/sites-available/default
 
 server {
     listen 80;
     server_name 80.78.241.26;
     return 301 https://gumaonelove.ru$request_uri;
-}
-
-server{
-    listen 443 ssl;
-    ssl on;
-    ssl_certificate /etc/ssl/gumaonelove_ru.crt;
-    ssl_certificate_key /etc/ssl/gumaonelove_ru.key;
-    server_name gumaonelove.ru;
-    client_max_body_size 100M;
-
-    gzip on;
-    gzip_vary on;
-    gzip_proxied any;
-    gzip_http_version 1.1;
-    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
 
     location /static/ {
         root /home/gumaonelove/tatarby;
@@ -62,26 +60,48 @@ server{
     }
 }
 
+cd /etc/supervisor/conf.d/
+sudo ln /home/gumaonelove/tatarby/config/tatarby.conf
 
-/etc/systemd/system/dialo.service
+sudo update-rc.d supervisor enable
 
-sudo systemctl start dialo
-sudo systemctl enable dialo
-sudo systemctl status dialo
-sudo systemctl kill dialo
+sudo nano /lib/systemd/system/dialo.service
+===============================================================
+[Unit]
+Description=Kazan Express bot
+After=network.target
 
-sudo nano /etc/nginx/sites-available/default
+[Service]
+ExecStart=/home/gumaonelove/KazanExpress_TgBot/venv/bin/python dialo.py
+ExecReload=/home/gumaonelove/KazanExpress_TgBot/venv/bin/python dialo.py
+WorkingDirectory=/home/gumaonelove/KazanExpress_TgBot/
+KillMode=process
+Restart=always
+RestartSec=5
 
-server{
-    listen 5005 ssl;
-    ssl on;
-    ssl_certificate /etc/ssl/gumaonelove_ru.crt;
-    ssl_certificate_key /etc/ssl/gumaonelove_ru.key;
-    server_name gumaonelove.ru;
-    client_max_body_size 100M;
+[Install]
+WantedBy=multi-user.target
+===============================================================
 
-    location / {
-        include proxy_params;
-        proxy_pass http://unix:/home/gumaonelove/by_kirill/wsgi_dialo.sock;
-    }
-}
+
+sudo nano /lib/systemd/system/flask_net.service
+===============================================================
+[Unit]
+Description=Kazan Express bot
+After=network.target
+
+[Service]
+ExecStart=/home/gumaonelove/KazanExpress_TgBot/venv/bin/python flask_net.py
+ExecReload=/home/gumaonelove/KazanExpress_TgBot/venv/bin/python flask_net.py
+WorkingDirectory=/home/gumaonelove/KazanExpress_TgBot/
+KillMode=process
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+===============================================================
+
+Логин: root
+Пароль: 7y7:H7%fX3dU
+151.248.122.169
