@@ -6,9 +6,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@k_y%v+20k5(!kkl6epo6!kho^hywn&-dnzj=b(u&h%w$$2_cu'
 
 DEBUG = True
+CORS_ALLOWED_ORIGINS = ['194.58.107.180']
 
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CSRF_TRUSTED_ORIGINS = ['http://194.58.107.180', '194.58.107.180']
 ALLOWED_HOSTS = ['127.0.0.1', '194.58.107.180', 'tatlearn.ru']
-
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -21,13 +32,15 @@ INSTALLED_APPS = [
     'study',
     'ckeditor',
     'ckeditor_uploader',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+#     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
