@@ -1,7 +1,7 @@
 server {
     listen 80;
     server_name 194.58.107.180;
-    return 301 https://kpnu-tatem.ru$request_uri;
+    return 301 https://tatlearn.ru$request_uri;
 }
 
 server {
