@@ -1,0 +1,62 @@
+{% load static %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TatLearn</title>
+    <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+
+    <script src="https://kit.fontawesome.com/7d0ca4e7f5.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="for-auth">
+<nav class="main-nav" id="main-nav">
+    <div class="main-nav__container container">
+        <a href="/static" class="main-nav__logo">TatLearn</a>
+        {% if request.path == '/' %}
+            <div class="main-nav-link-block">
+                <a href="{% url 'auth' %}" class="main-nav-link">вход</a>
+            </div>
+        {% endif %}
+    </div>
+</nav>
+<div class="auth" id="auth">
+    <div class="auth-window" id="auth-window">
+        <div class="choose-method">
+            <button id="enter" class="method-btn method-btn-active">
+                вход
+            </button>
+            <button id="register" class="method-btn">
+                регистрация
+            </button>
+        </div>
+            <div class="login input-block">
+                <p class="input-hint">логин</p>
+                <input class="main-input" type="text" id="login">
+            </div>
+            <div class="password input-block">
+                <p class="input-hint">пароль</p>
+                <input class="main-input" type="text" id="first_pas">
+            </div>
+        <div class="confirm-password input-block" id="confirm-password">
+            <p class="input-hint">повторите пароль</p>
+            <input class="main-input" type="text" id="sec_pas">
+        </div>
+        <button class="submit-btn" id="submit-btn">вход</button>
+    </div>
+</div>
+<script src="{% static 'js/request.js' %}"></script>
+<script src="{% static 'js/auth.js' %}"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
