@@ -1,0 +1,65 @@
+ssh root@194.58.107.180
+~CRKR#7U3+n=
+
+apt update;
+apt upgrade;
+adduser gumaonelove;
+hewbfhuebwuhebr34bfuyb3ub4bfwebdshewbahHHHHHsad
+
+apt install sudo;
+usermod -aG sudo gumaonelove;
+su gumaonelove;
+sudo apt install nginx git supervisor;
+
+python3 -V
+sudo apt-get install python3-venv
+python3 -m venv venv
+source env/bin/activate
+
+pip install -r req.txt
+
+https://github.com/gumaonelove/tatarby.git
+
+python manage.py collectstatic
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+
+python stt.py
+python tts.py
+python dialo.py
+
+sudo service nginx restart
+dhfbhdsbh74357y437fbhdsbhf47375
+sudo service supervisor start
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl status tatarby
+sudo supervisorctl restart tatarby
+
+sudo nano /etc/nginx/sites-available/default
+
+sudo service nginx restart
+
+cd /etc/supervisor/conf.d/
+sudo ln /home/gumaonelove/tatarby/config/tatarby.conf
+
+sudo update-rc.d supervisor enable
+
+
+sudo service supervisor start
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl status tatarby
+sudo supervisorctl restart tatarby
+
+sudo nano /lib/systemd/system/dialo.service
+sudo nano /lib/systemd/system/flask_net.service
+sudo nano /lib/systemd/system/tts.service
+
+
+sudo systemctl daemon-reload
+sudo systemctl enable flask_net
+sudo systemctl start flask_net
+sudo systemctl stop flask_net
+sudo systemctl restart flask_net

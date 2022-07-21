@@ -140,5 +140,6 @@ cython_debug/
 
 .idea
 /static
-/cms/migrations/
-/study/migrations/
+/backend/cms/migrations/
+/backend/study/migrations/
+/backend/static/

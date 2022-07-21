@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TatLearn</title>
+    <link rel="shortcut icon" href="{% static '/icons/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <script src="https://kit.fontawesome.com/7d0ca4e7f5.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="header-learn">
+    <div class="header-learn__container container">
+        <div class="header-learn__menu">
+            <div class="header-learn__title">обучающий портал</div>
+            <div class="header-learn__info">
+                <div class="header-learn__name">{{ student.get_sn }}</div>
+                <a href="{% url 'profile' %}" class="header-learn__avatar">
+                    {% if student.photo %}
+                        <img src="{{ student.get_photo_url }}" alt="{{ student.get_sn }}">
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% block content %}
+    <div class="wrapper learn-section learn-section-education">
+        <div class="learn">
+            <div class="learn__container container">
+                <div class="learn__content">
+                    <div class="learn__title">выберите инструмент</div>
+                    <div class="learn__items">
+                        <a href="{% url 'reading' %}" class="learn__item">
+                            <span>чтение - тестирование способности навыков чтения </span>
+                            <div class="learn__img"><img src="{% static '/icons/icon-1.svg' %}" alt="1"></div>
+                        </a>
+                        <a href="{% url 'audition' %}" class="learn__item">
+                            <span>аудирование - проверка знаний слов</span>
+                            <div class="learn__img"><img src="{% static '/icons/icon-2.svg' %}" alt="2"></div>
+                        </a>
+                        <a href="{% url 'chatbot' %}" class="learn__item">
+                            <span>чат-бот на татарском</span>
+                            <div class="learn__img"><img src="{% static '/icons/icon-3.svg' %}" alt="3"></div>
+                        </a>
+                        <a href="{% url 'syntax' %}" class="learn__item">
+                            <span>синтаксис - составление предложений </span>
+                            <div class="learn__img"><img src="{% static '/icons/icon-4.svg' %}" alt="4"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-learn">
+    <div class="footer-learn__container container">
+        <div class="footer-learn__menu">
+            <div class="footer-learn__copyright">
+                tatlearn 2022
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+{% endblock content %}
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+</body>
+
+</html>

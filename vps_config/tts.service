@@ -1,0 +1,14 @@
+[Unit]
+Description=text to speak
+After=network.target
+
+[Service]
+ExecStart=/home/gumaonelove/KazanExpress_TgBot/venv/bin/python tts.py
+ExecReload=/home/gumaonelove/KazanExpress_TgBot/venv/bin/python tts.py
+WorkingDirectory=/home/gumaonelove/KazanExpress_TgBot/
+KillMode=process
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
