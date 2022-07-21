@@ -290,7 +290,7 @@ class TTSView(View):
             url='http://127.0.0.1:3003/tts',
             data='татарча сүз '.encode() + body.decode().encode()
         )
-        file_url = 'http://127.0.0.1:8000/media/' + r.json()['output']
+        file_url = 'http://194.58.107.180/media/' + r.json()['output']
         return JsonResponse({'status': 200, 'file_url': file_url})
 
     def get(self, request, *args, **kwargs):
