@@ -1,8 +1,8 @@
 "use strict";
 
-const audition_url = 'http://127.0.0.1:8000/study/audition/';
-const get_words_url = 'http://127.0.0.1:8000/study/get_words/';
-const get_tts_url = 'http://127.0.0.1:8000/study/tts/';
+const audition_url = 'http://194.58.107.180/study/audition/';
+const get_words_url = 'http://194.58.107.180/study/get_words/';
+const get_tts_url = 'http://194.58.107.180/study/tts/';
 let audioLink;
 
 // start gumaonelove script

@@ -1,5 +1,5 @@
-const learn_navigations_url = 'http://127.0.0.1:8000/study/learn_navigations';
-const profile_url = 'http://127.0.0.1:8000/study/profile';
+const learn_navigations_url = 'http://194.58.107.180/study/learn_navigations';
+const profile_url = 'http://194.58.107.180/study/profile';
 
 window.onload = () => {
     var action = 'вход';
