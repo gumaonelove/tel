@@ -146,3 +146,5 @@ cython_debug/
 /vps_config/deploy-vps.txt
 /vps_config/open_key.ppk
 /vps_config/secret.ppk
+/vps_config/tatlearn.crt
+/vps_config/tatlearn.key

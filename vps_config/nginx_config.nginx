@@ -1,21 +1,43 @@
+map $sent_http_content_type $expires {
+    "text/html"                 epoch;
+    "text/html; charset=utf-8"  epoch;
+    default                     off;
+}
+
 server {
     listen 80;
-    server_name 194.58.107.180;
+    server_name 178.21.8.162;
     return 301 https://tatlearn.ru$request_uri;
 }
 
 server {
     listen 80;
     server_name tatlearn.ru;
-    client_max_body_size 50M;
+    return 301 https://tatlearn.ru$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /etc/ssl/tatlearn.crt;
+    ssl_certificate_key /etc/ssl/tatlearn.key;
+    server_name tatlearn.ru;
+    client_max_body_size 100M;
+
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+
 
     location /static/ {
-        root /home/gumaonelove/tatarby;
+        root /home/gumaonelove/tatarby/backend;
         expires 30d;
     }
 
     location /media/ {
-        root /home/gumaonelove/tatarby;
+        root /home/gumaonelove/tatarby/backend;
         expires 30d;
     }
 

@@ -7,23 +7,8 @@ SECRET_KEY = 'django-insecure-@k_y%v+20k5(!kkl6epo6!kho^hywn&-dnzj=b(u&h%w$$2_cu
 
 DEBUG = True
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = [
-  'accept',
-  'accept-encoding',
-  'authorization',
-  'content-type',
-  'origin',
-  'dnt',
-  'user-agent',
-  'x-csrftoken',
-  'x-requested-with']
-CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT']
+ALLOWED_HOSTS = ['127.0.0.1', '178.21.8.162', 'tatlearn.ru']
 
-CSRF_TRUSTED_ORIGINS = ['http://194.58.107.180', '194.58.107.180']
-ALLOWED_HOSTS = ['127.0.0.1', '194.58.107.180', 'tatlearn.ru']
-SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,15 +21,13 @@ INSTALLED_APPS = [
     'study',
     'ckeditor',
     'ckeditor_uploader',
-    'corsheaders',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-#     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

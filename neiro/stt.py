@@ -95,17 +95,17 @@ def get_name():
 def rouge_method():
     print(request.data.decode())
     print(request.files)
-    print(request.form)
+    print(request.form, request.form['text'], dir(request), dir(request.form))
 
     request_data = request.files['file']
-    original = request.data.decode()
+    original = request.form['text']
     name = get_name()
 
 
     request_data.save(name)
     print(name)
     text = tr.tatwaw2tattext(name)
-    print(text, original)
+    print(text, 'qqq', original)
 
     r = levenshtein(text[0], original)
     resp = flask.jsonify({'score': r, 'text': text[0]})
