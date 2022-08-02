@@ -1,4 +1,4 @@
-const dialo_url = "https://tatlearn.ru/study/dialo/";
+const dialo_url = "http://193.105.65.66/study/dialo/";
 
 window.onload = () => {
   const submit = document.querySelector("#submit-btn");
