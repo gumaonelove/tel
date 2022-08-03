@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name 193.105.65.66;
+    server_name 185.149.243.13;
     client_max_body_size 100M;
 
     location /static/ {

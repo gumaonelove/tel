@@ -1,4 +1,4 @@
-const dialo_url = "http://193.105.65.66/study/dialo/";
+const dialo_url = "http://185.149.243.13/study/dialo/";
 
 window.onload = () => {
   const submit = document.querySelector("#submit-btn");
