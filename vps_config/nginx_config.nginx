@@ -6,7 +6,7 @@ map $sent_http_content_type $expires {
 
 server {
     listen 80;
-    server_name 178.21.8.162;
+    server_name 185.149.243.13;
     return 301 https://tatlearn.ru$request_uri;
 }
 

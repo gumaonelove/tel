@@ -3,9 +3,9 @@ Description=text to speak
 After=network.target
 
 [Service]
-ExecStart=/home/tatlearn/tatarby/venv/bin/python tts.py
-ExecReload=/home/tatlearn/tatarby/venv/bin/python tts.py
-WorkingDirectory=/home/tatlearn/tatarby/neiro/
+ExecStart=/home/gumaonelove/tatarby/venv/bin/python tts.py
+ExecReload=/home/gumaonelove/tatarby/venv/bin/python tts.py
+WorkingDirectory=/home/gumaonelove/tatarby/neiro/
 KillMode=process
 Restart=always
 RestartSec=5

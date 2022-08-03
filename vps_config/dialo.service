@@ -3,9 +3,9 @@ Description=dialog
 After=network.target
 
 [Service]
-ExecStart=/home/tatlearn/tatarby/venv/bin/python dialo.py
-ExecReload=/home/tatlearn/tatarby/venv/bin/python dialo.py
-WorkingDirectory=/home/tatlearn/tatarby/neiro/
+ExecStart=/home/gumaonelove/tatarby/venv/bin/python dialo.py
+ExecReload=/home/gumaonelove/tatarby/venv/bin/python dialo.py
+WorkingDirectory=/home/gumaonelove/tatarby/neiro/
 KillMode=process
 Restart=always
 RestartSec=5

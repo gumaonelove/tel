@@ -4,12 +4,12 @@ server {
     client_max_body_size 100M;
 
     location /static/ {
-        root /home/tatlearn/tatarby/backend;
+        root /home/gumaonelove/tatarby/backend;
         expires 30d;
     }
 
     location /media/ {
-        root /home/tatlearn/tatarby/backend;
+        root /home/gumaonelove/tatarby/backend;
         expires 30d;
     }
 
