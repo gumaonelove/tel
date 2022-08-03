@@ -17,7 +17,7 @@
 <body>
 <nav class="main-nav" id="main-nav">
     <div class="main-nav__container container">
-        <a href="/static" class="main-nav__logo">TatLearn</a>
+        <a href="{% url 'main_page' %}" class="main-nav__logo">TatLearn</a>
         {% if request.path == '/' %}
             <div class="main-nav-link-block">
                 <a href="{% url 'auth' %}" class="main-nav-link">вход</a>
