@@ -1,8 +1,8 @@
 "use strict";
 
-const audition_url = 'https://tatlearn.ru/study/audition/';
-const get_words_url = 'https://tatlearn.ru/study/get_words/';
-const get_tts_url = 'https://tatlearn.ru/study/tts/';
+const audition_url = 'https://tatlearn.kai.ru/study/audition/';
+const get_words_url = 'https://tatlearn.kai.ru/study/get_words/';
+const get_tts_url = 'https://tatlearn.kai.ru/study/tts/';
 let audioLink;
 
 // start gumaonelove script
