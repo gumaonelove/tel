@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-@k_y%v+20k5(!kkl6epo6!kho^hywn&-dnzj=b(u&h%w$$2_cu
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '193.105.65.66', 'tatlearn.kai.ru']
+ALLOWED_HOSTS = ['127.0.0.1', 'learn.saf.tatar']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
