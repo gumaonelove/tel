@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TatLearn</title>
+    <title>Learn</title>
     <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -17,10 +17,10 @@
 <body>
 <nav class="main-nav" id="main-nav">
     <div class="main-nav__container container">
-        <a href="{% url 'main_page' %}" class="main-nav__logo">TatLearn</a>
+        <a href="{% url 'main_page' %}" class="main-nav__logo">Learn</a>
         {% if request.path == '/' %}
             <div class="main-nav-link-block">
-                <a href="{% url 'auth' %}" class="main-nav-link">вход</a>
+                <a href="{% url 'learn_navigations' %}" class="main-nav-link">Начать обучение</a>
             </div>
         {% endif %}
     </div>
@@ -30,7 +30,7 @@
         <div class="header__container container">
             <h1 class="header-heading">
                 <span>изучение татарского</span>
-                <span>вместе с TatLearn</span>
+                <span>вместе с Learn</span>
             </h1>
         </div>
     </header>
@@ -39,7 +39,7 @@
         <section class="page-section">
             <div class="about">
                 <div class="about__container container">
-                    <h2 class="about-heading">TatLearn - портал для интерактивного изучения татарского языка с
+                    <h2 class="about-heading">Learn - портал для интерактивного изучения татарского языка с
                         использованием методов геймификации</h2>
                     <div class="about-blocks">
                         {% for content in contents %}
@@ -72,7 +72,7 @@
 {% endblock content %}
 <footer class="footer" id="footer">
     <div class="footer__container container">
-        <p class="footer-copyright">copyright internationaldudes {{ year }}</p>
+        <p class="footer-copyright">copyright kaITeam {{ year }}</p>
         <p class="footer-contacts">contact us:<br/>{{ phone }}/{{ email }}</p>
     </div>
 </footer>

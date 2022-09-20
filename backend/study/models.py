@@ -1,23 +1,15 @@
 from django.db import models
-from django.conf import settings
 
 
 import math
 
 
-User = settings.AUTH_USER_MODEL
+from django.contrib.auth.models import User
 
 
 class Student(models.Model):
     '''Ученик'''
-    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
-
-    surname = models.CharField(verbose_name='Фамилия', max_length=30, null=True, blank=True)
-    name = models.CharField(verbose_name='Имя', max_length=30, null=True, blank=True)
-    lastname = models.CharField(verbose_name='Отчество', max_length=30, null=True, blank=True)
-
-    birth_day_date = models.DateField(verbose_name='Дата рождения', null=True, blank=True)
-    photo = models.ForeignKey('Image', verbose_name='Фото', null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE, null=True, blank=True)
 
     rang = models.FloatField(verbose_name='Ранг пользователя', default=0)
     texts = models.ManyToManyField('ReadText', verbose_name='Текста прочитанные пользователем',
@@ -26,21 +18,6 @@ class Student(models.Model):
                                    null=True, blank=True, related_name='learned_words')
     sentence = models.ManyToManyField('BuildSentence', verbose_name='Предложения собранные пользователем',
                                       null=True, blank=True, related_name='build_sentence')
-
-    def get_full_name(self):
-        return f'{self.surname} {self.name} {self.lastname}'
-
-    def get_sn(self):
-        return f'{self.surname} {self.name}'
-
-    def __str__(self):
-        return f'Пользователь - {self.id} - {self.get_full_name()}'
-
-    def full_complited(self):
-        return self.surname and self.name and self.lastname and self.birth_day_date and self.photo
-
-    def get_photo_url(self):
-        return self.photo.img.url
 
     def recals_rang(self):
         _rang = self.words.count() * 0.06 + self.sentence.count() * 0.04 + self.texts.count() * 0.1
