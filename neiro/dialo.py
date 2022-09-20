@@ -14,7 +14,7 @@ from urllib.parse import quote, unquote
 class DialoBot():
     def __init__(self):
         self.tokenizer = AutoTokenizer.from_pretrained("Grossmend/rudialogpt3_medium_based_on_gpt2")
-        self.model = AutoModelForCausalLM.from_pretrained("Grossmend/rudialogpt3_medium_based_on_gpt2")
+        self.model = AutoModelForCausalLM.from_pretrained("Grossmend/rudialogpt3_medium_based_on_gpt2").cuda()
 
     def get_length_param(self, text: str) -> str:
         tokens_count = len(self.tokenizer.encode(text))
@@ -57,7 +57,7 @@ class DialoBot():
 
             chat_history_ids.append(new_user_input_ids)
 
-        bot_input_ids = torch.cat(chat_history_ids, dim=-1)
+        bot_input_ids = torch.cat(chat_history_ids, dim=-1).cuda()
 
         output = self.model.generate(
             bot_input_ids,
@@ -72,9 +72,9 @@ class DialoBot():
             eos_token_id=self.tokenizer.eos_token_id,
             unk_token_id=self.tokenizer.unk_token_id,
             pad_token_id=self.tokenizer.pad_token_id,
-            device='cpu',
+            device='cuda',
         )
-        ru_out = self.tokenizer.decode(output[:, bot_input_ids.shape[-1] + 1:][0], skip_special_tokens=True)
+        ru_out = self.tokenizer.decode(output.cpu()[:, bot_input_ids.shape[-1] + 1:][0], skip_special_tokens=True)
         print(ru_out)
         tat_out = self.rus2tat(ru_out)
         return tat_out

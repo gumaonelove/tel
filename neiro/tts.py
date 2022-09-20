@@ -10,7 +10,7 @@ class TTS():
     def __init__(self, ):
         language = 'tt'
         model_id = 'dilyara_v2'
-        device = torch.device('cpu')
+        device = torch.device('cuda')
 
         model, example_text = torch.hub.load(repo_or_dir='snakers4/silero-models',
                                              model='silero_tts',

@@ -14,7 +14,7 @@ class Translator():
         #tat waw to tat text
         self.processor = Wav2Vec2Processor.from_pretrained("anton-l/wav2vec2-large-xlsr-53-tatar")
         model = Wav2Vec2ForCTC.from_pretrained("anton-l/wav2vec2-large-xlsr-53-tatar")
-        model.to("cpu")
+        model.to("cuda")
         self.model = model
 
     def tatwaw2tattext(self, wav_path: str):
@@ -27,7 +27,7 @@ class Translator():
         print(inputs.attention_mask.shape)
 
         with torch.no_grad():
-            logits = self.model(inputs.input_values.to("cpu"), attention_mask=inputs.attention_mask.to("cpu")).logits
+            logits = self.model(inputs.input_values.to("cuda"), attention_mask=inputs.attention_mask.to("cuda")).logits.cpu()
 
         pred_ids = torch.argmax(logits, dim=-1)
 
