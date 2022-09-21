@@ -84,9 +84,6 @@ class AuditionView(UserMixin, View):
 
 
     def post(self, request):
-  
-  
-
         user_true_variants = loads(request.body)['userTrueVariants']
 
         for text_word in user_true_variants:
@@ -99,15 +96,11 @@ class AuditionView(UserMixin, View):
             self.student.words.add(new_learned_word)
 
         return redirect('/study/audition/')
- 
 
     def put(self, request):
-      
         status = loads(request.body)['status']
 
         if status == 'restart':
-          
-
             self.student.words.clear()
             self.student.save()
             return JsonResponse({}) # to audition
@@ -115,13 +108,9 @@ class AuditionView(UserMixin, View):
             return redirect('/')
 
 
-
 class SyntaxView(UserMixin, View):
     '''Синтаксис'''
     def get(self, request):
-
-     
-
         buildSentences_qs, sentences_qs = self.student.sentence.all(), Sentence.objects.all()
         sentences_set, buildSentences_set = set(), set()
 
@@ -143,9 +132,6 @@ class SyntaxView(UserMixin, View):
 
 
     def post(self, request):
-  
-     
-
         sentence_id = loads(request.body)['sentence_id']
 
         sentence = Sentence.objects.get(id=sentence_id)
@@ -160,60 +146,23 @@ class SyntaxView(UserMixin, View):
         return redirect('/study/reading/')
     
 
-
 class ChatbotView(UserMixin, View):
     '''Чат бот'''
     def get(self, request):
-
         context = {
-            'student': Student.objects.get(user=self.user)
+            'student': self.student
         }
         return render(request, 'chatbot.html', context)
-
 
 
 class PersonalCabView(UserMixin, View):
     '''Личный кабинет'''
     def get(self, request):
         context = {
-            'student': Student.objects.get(user=self.user),
+            'student': self.student,
             'form': ImageForm()
         }
         return render(request, 'personal_cab.html', context)
-
-
-    def put(self, request):
-     
-        data = loads(request.body)
-
-        user = self.student.user
-        user.username = data['login']
-        user.save()
-
-        self.student.user = user
-        self.student.surname = data['surname']
-        self.student.name = data['name']
-        self.student.lastname = data['lastname']
-        try:
-            self.student.birth_day_date = data['birth_day_date']
-        except:
-            self.student.birth_day_date = None
-            print('Ошибка при сохранении даты рождения')
-        self.student.save()
-
-        return redirect('/study/profile/')
-
-    def post(self, request, *args, **kwargs):
-     
-
-        form = ImageForm(request.POST, request.FILES)
-        form.save(commit=True)
-
-        self.student.photo = form.instance
-        self.student.save()
-
-        return redirect('/study/profile/')
-   
 
 
 class DialoView(UserMixin, View):
