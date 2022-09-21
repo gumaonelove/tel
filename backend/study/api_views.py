@@ -27,9 +27,7 @@ class WordViewSet(viewsets.ModelViewSet):
 class GetWordsForAuditionApi(UserMixin, View):
     '''Отдаю слова для аудирования'''
     def get(self, request):
-        student = Student.objects.get(user=request.user)
-
-        learned_words_qs, words_qs = student.words.all(), Word.objects.all()
+        learned_words_qs, words_qs = self.student.words.all(), Word.objects.all()
         learned_words, words = set(), set()
 
         for learned_word in learned_words_qs:
