@@ -52,12 +52,9 @@ class ReadingView(UserMixin, View):
         return render(request, 'reading.html', context)
 
     def post(self, request):
-       
 
         text_id = loads(request.body)['text_id']
-
         score = loads(request.body)['score']
-
         read_text = Text.objects.get(id=text_id)
         new_read_text = ReadText()
         new_read_text.text = read_text
@@ -66,7 +63,6 @@ class ReadingView(UserMixin, View):
         new_read_text.save()
 
         self.student.texts.add(new_read_text)
-
         return redirect('/study/reading/')
 
 
