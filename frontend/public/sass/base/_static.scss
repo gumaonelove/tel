@@ -71,6 +71,12 @@ body.lock {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    @media (max-width: 768px) {
+        padding: 25px;
+    }
+    @media (max-width: 576px) {
+        border-radius: 15px;
+    }
     &.text-blue {
         .item-link {
             color: $linkColor;
@@ -78,28 +84,58 @@ body.lock {
     }
     &-big {
         min-height: 360px;
+        @media (max-width: 576px) {
+            min-height: auto;
+        }
         .item-text {
             max-width: 50%;
+            @media (max-width: 768px) {
+                max-width: 65%;
+            }
+        }
+        .item-img {
+            min-width: 300px;
+            @media (max-width: 1550px) {
+                min-width: 150px;
+            }
+            @media (max-width: 1200px) {
+                min-width: 220px;
+            }
+            @media (max-width: 576px) {
+                min-width: 100px;
+            }
         }
     }
     &-text {
         padding: 17px;
+        @media (max-width: 768px) {
+            padding: 0;
+        }
     }
     &-title {
         font-size: 36px;
         line-height: 43px;
         font-weight: 900;
+        @media (max-width: 576px) {
+            font-size: 26px;
+            line-height: 32px;
+        }
     }
     &-subtitle {
         margin-top: 30px;
         font-size: 24px;
         line-height: 29px;
         color: $darkColor;
+        @media (max-width: 576px) {
+            font-size: 16px;
+            line-height: 20px;
+        }
     }
     &-button {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-top: 30px;
     }
     &-link {
         display: flex;
@@ -111,6 +147,10 @@ body.lock {
         transition: opacity 0.2s ease-in-out;
         i {
             margin-right: 15px;
+            @media (max-width: 576px) {
+                margin-right: 5px;
+                transform: scale(0.9);
+            }
         }
         &:hover {
             transition: opacity 0.2s ease-in-out;
@@ -135,21 +175,41 @@ body.lock {
     &-name {
         font-size: 20px;
         line-height: 24px;
+        @media (max-width: 768px) {
+            font-size: 16px;
+            line-height: 20px;
+        }
     }
     &-live {
         margin: 30px 0;
         font-size: 32px;
         line-height: 38px;
         font-weight: 900;
+        @media (max-width: 768px) {
+            margin: 15px 0;
+            font-size: 24px;
+            line-height: 28px;
+        }
+        @media (max-width: 576px) {
+            font-size: 20px;
+            line-height: 24px;
+        }
     }
     &-soon {
         font-size: 20px;
         line-height: 24px;
+        @media (max-width: 576px) {
+            font-size: 16px;
+            line-height: 20px;
+        }
     }
     &-icon {
         display: flex;
         align-items: center;
         justify-content: center;
+        @media (max-width: 576px) {
+            transform: scale(0.8);
+        }
     }
 }
 
