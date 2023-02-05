@@ -1,10 +1,11 @@
 import {FC} from "react";
 import {IChatBotStarterProps} from "../types";
 
-const ChatbotStarter: FC<IChatBotStarterProps> = ({ setStartMessage, setShowMessages}) => {
-  const handleClickStartText = (text: string): any => {
-    setStartMessage(text);
+const ChatbotStarter: FC<IChatBotStarterProps> = ({ setShowMessages, setNewMessages, sendMessage}) => {
+  const handleClickStartText = (message: string): any => {
     setShowMessages(true);
+    setNewMessages(message);
+    sendMessage();
   }
   return (
     <div className="chatbot__start">

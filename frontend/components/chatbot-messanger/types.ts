@@ -4,13 +4,23 @@ export interface IAllMessages {
   messages: string[]
 }
 
+export interface IMessagesData {
+  data: IMessages[];
+}
+
+interface IMessages {
+  id: number;
+  message: string;
+}
+
 export interface IChatBotMessagesProps {
-  startMessage: string;
+  allMessages: string[];
 }
 
 export interface IChatBotStarterProps {
-  setStartMessage: Dispatch<SetStateAction<string>>;
   setShowMessages: Dispatch<SetStateAction<boolean>>;
+  setNewMessages: (message: string) => void;
+  sendMessage: () => Promise<void>;
 }
 
 interface IChatBotStarter {

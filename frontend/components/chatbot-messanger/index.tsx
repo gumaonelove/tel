@@ -5,35 +5,50 @@ import {useEffect, useState} from "react";
 import apiClient from "../../lib/axios";
 import {API_URL} from "../../lib/constants";
 import {IAllMessages} from "./types";
+import {toast} from "react-toastify";
 
 const ChatbotMessanger = () => {
-  const [startMessage, setStartMessage] = useState<string>("");
   const [showMessages, setShowMessages] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [blockedMessages, setBlockedMessages] = useState<boolean>(false);
-  const [allMessages] = useState<IAllMessages>({
-    messages: []
-  });
-
+  const [allMessages, setAllMessages] = useState<string[]>(["Сәлам! Эшләрең ничек? Миңа берәр нәрсә яз."]);
 
   const sendMessage = async () => {
-    const { data } = await apiClient(API_URL).post(
-      `/dialogue/`, allMessages
-    );
+    let dataToServer = [...allMessages]
+    await apiClient(API_URL).post(
+      `/dialogue/`, dataToServer
+    ).then((response) => {
+      setAllMessages([
+        ...allMessages,
+        response.data.output
+      ]);
+      setBlockedMessages(false);
+    }).catch((err) => {
+      console.log(err)
+      toast.error("Произошла ошибка при генерации ответа, пожалуйтса, попробуйте снова!")
+    })
+  }
 
-    console.log(data)
+  const setNewMessages = (message: string) => {
+    if (!showMessages) {
+      setShowMessages(true);
+    }
+    allMessages.push(message)
+    setAllMessages([
+      ...allMessages
+    ]);
+    setInputValue("");
+    setBlockedMessages(true);
   }
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    if (!showMessages) {
-      setShowMessages(true);
-      setStartMessage(inputValue);
+    if (!blockedMessages) {
+      let message = inputValue;
+      setNewMessages(message);
+      sendMessage();
+    } else {
+      toast.error("Пожалуйста, подождите ответа, прежде чем писать что-то :)")
     }
-    allMessages.messages.push(inputValue);
-    console.log(allMessages)
-    setInputValue("");
-    setBlockedMessages(true);
-    sendMessage();
   }
 
   return (
@@ -45,12 +60,13 @@ const ChatbotMessanger = () => {
               showMessages
               ?
                 <ChatbotMessages
-                  startMessage={startMessage}
+                  allMessages={allMessages}
                 />
                 :
                 <ChatbotStarter
-                  setStartMessage={setStartMessage}
                   setShowMessages={setShowMessages}
+                  setNewMessages={setNewMessages}
+                  sendMessage={sendMessage}
                 />
             }
           </div>
