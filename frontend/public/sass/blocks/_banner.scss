@@ -1,0 +1,98 @@
+.banner {
+  margin: 20px 0;
+  color: $greyColor;
+  &__container {
+  }
+  &__content {
+    border-radius: 30px;
+    padding: 40px;
+    display: flex;
+    position: relative;
+    min-height: 170px;
+    @media only screen and (max-width: 992px) {
+      flex-direction: column;
+    }
+    @media only screen and (max-width: 768px) {
+      padding: 25px;
+    }
+    @media only screen and (max-width: 576px) {
+      border-radius: 15px;
+    }
+  }
+  &__title {
+    flex: 0 0 24%;
+    margin-right: 40px;
+    font-size: 36px;
+    line-height: 43px;
+    font-weight: 900;
+    @media only screen and (max-width: 992px) {
+      font-size: 30px;
+      line-height: 36px;
+    }
+    @media only screen and (max-width: 576px) {
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+  &__description {
+    max-width: 700px;
+    flex: 1;
+    font-size: 32px;
+    line-height: 38px;
+    @media (max-width: 1550px) {
+      max-width: none;
+      flex: 0 0 50%;
+    }
+    @media only screen and (max-width: 992px) {
+      margin-top: 10px;
+      max-width: 65%;
+      font-size: 26px;
+      line-height: 32px;
+    }
+    @media only screen and (max-width: 576px) {
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
+  &__img {
+    position: absolute;
+    right: 115px;
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    transform: translateY(-50%);
+    flex: 0 0 24%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      height: 100%;
+    }
+    @media (max-width: 1550px) {
+      flex: 0 0 24%;
+      position: relative;
+      right: auto;
+      top: auto;
+      transform: translateY(0);
+    }
+    @media only screen and (max-width: 992px) {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      flex: 0 0 50%;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    @media only screen and (max-width: 768px) {
+      right: 20px;
+      width: 150px;
+      height: 150px;
+    }
+    @media only screen and (max-width: 576px) {
+      width: 80px;
+      height: 80px;
+      right: 10px;
+    }
+  }
+}
