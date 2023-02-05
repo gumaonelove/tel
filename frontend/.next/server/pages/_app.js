@@ -470,7 +470,7 @@ const AppLayout = ({ component , children , isFulledHeader  })=>{
 /* harmony export */   "T": () => (/* binding */ API_URL),
 /* harmony export */   "X": () => (/* binding */ PAGES_FULLED_HEADER)
 /* harmony export */ });
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = "http://127.0.0.1:8001";
 const PAGES_FULLED_HEADER = [
     "/chatbot"
 ];

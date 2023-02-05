@@ -18,7 +18,7 @@ const ChatbotMessanger = () => {
 
   const sendMessage = async () => {
     const { data } = await apiClient(API_URL).post(
-      `/study/dialo/`, allMessages
+      `/dialogue/`, allMessages
     );
 
     console.log(data)
