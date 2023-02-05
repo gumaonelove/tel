@@ -126,6 +126,8 @@ body.lock {
         right: 0;
         border-radius: 30px;
         overflow: hidden;
+        display: flex;
+        align-items: flex-end;
         img {
             height: 100%;
         }

@@ -8,7 +8,7 @@ const DefaultHeaderRight = () => {
           <div className="header__item-soon item-soon">Илдус Әхмәтҗан укый — 11.30</div>
         </div>
         <div className="header__item-button item-button">
-          <a href="frontend/layout/default/header/header-right/index" target="_blank" rel="nofollow noreferrer noopener"
+          <a href="https://saf-radio.ru/" target="_blank" rel="nofollow noreferrer noopener"
              className="header__item-link item-link">
             <i className="st-link st-link-light"></i>
             <span>Саф - балалар радиосы</span>

@@ -6,20 +6,20 @@ const DefaultHeaderMiddle = () => {
     <div className="header__middle">
       <div className="header__item item item-big text-blue">
         <div className="header__item-text item-text">
-          <div className="header__item-title item-title">Чтение —</div>
+          <div className="header__item-title item-title">Tel —</div>
           <div className="header__item-subtitle item-subtitle">
-            тестирование способности навыков чтения
+            портал для интерактивного изучения татарского языка с использованием методов геймификации
           </div>
         </div>
         <div className="header__item-button item-button">
-          <Link path={"https://google.com/"} className="header__item-link item-link">
+          <Link path={"/chatbot"} className="header__item-link item-link">
             <i className="st-link"></i>
-            <span>Начать упражнение</span>
+            <span>Открыть чат-бот</span>
           </Link>
         </div>
         <div className="header__item-img item-img">
           <Image
-            src={"/img/main_page/boy.png"}
+            src={"/icons/book.png"}
             alt={"boy"}
             layout={"responsive"}
             width={480}
