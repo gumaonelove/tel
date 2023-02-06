@@ -6,7 +6,7 @@ After=network.target
 [Service]
 User=USER
 WorkingDirectory=/home/USER/tatarby/neiro
-ExecStart=/home/USER/tatarby/venv/bin/gunicorn -c /home/USER/tatarby/neiro/gunicorn_conf.py app:app
+ExecStart=/home/USER/tatarby/venv/bin/python app.py
 
 
 [Install]
