@@ -43,9 +43,13 @@ const ChatbotMessanger = () => {
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     if (!blockedMessages) {
-      let message = inputValue;
-      setNewMessages(message);
-      sendMessage();
+      if (inputValue) {
+        let message = inputValue;
+        setNewMessages(message);
+        sendMessage();
+      } else {
+        toast.error("Текст сообщения не может быть пустым :)")
+      }
     } else {
       toast.error("Пожалуйста, подождите ответа, прежде чем писать что-то :)")
     }
