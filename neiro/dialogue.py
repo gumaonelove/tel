@@ -8,8 +8,8 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 class DialoBot():
     def __init__(self):
-        self.tokenizer = AutoTokenizer.from_pretrained("tinkoff-ai/ruDialoGPT-medium")
-        self.model = AutoModelForCausalLM.from_pretrained("tinkoff-ai/ruDialoGPT-medium").cpu()
+        self.tokenizer = AutoTokenizer.from_pretrained("tinkoff-ai/ruDialoGPT-large")
+        self.model = AutoModelForCausalLM.from_pretrained("tinkoff-ai/ruDialoGPT-large").cpu()
         self.device = torch.device('cpu')
 
     def tat2rus(self, text):
