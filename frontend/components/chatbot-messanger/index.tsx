@@ -12,8 +12,10 @@ const ChatbotMessanger = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [blockedMessages, setBlockedMessages] = useState<boolean>(false);
   const [allMessages, setAllMessages] = useState<string[]>(["Сәлам! Эшләрең ничек? Миңа берәр нәрсә яз."]);
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   const sendMessage = async () => {
+    setLoading(true);
     let dataToServer = [...allMessages]
     await apiClient(API_URL).post(
       `/dialogue/`, dataToServer
@@ -23,9 +25,11 @@ const ChatbotMessanger = () => {
         response.data.output
       ]);
       setBlockedMessages(false);
+      setLoading(false);
     }).catch((err) => {
       console.log(err)
-      toast.error("Произошла ошибка при генерации ответа, пожалуйтса, попробуйте снова!")
+      toast.error("Произошла ошибка при генерации ответа, пожалуйтса, попробуйте снова!");
+      setLoading(false);
     })
   }
 
@@ -65,6 +69,7 @@ const ChatbotMessanger = () => {
               ?
                 <ChatbotMessages
                   allMessages={allMessages}
+                  isLoading={isLoading}
                 />
                 :
                 <ChatbotStarter

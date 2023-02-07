@@ -1,7 +1,7 @@
 import {FC, useEffect, useRef, useState} from "react";
 import {IChatBotMessagesProps, IMessagesData} from "../types";
 
-const ChatbotMessages: FC<IChatBotMessagesProps> = ({allMessages}) => {
+const ChatbotMessages: FC<IChatBotMessagesProps> = ({allMessages, isLoading}) => {
   const bottomRef = useRef<null | HTMLDivElement>(null);
 
   const [messages, setMessages] = useState<IMessagesData>({
@@ -35,20 +35,27 @@ const ChatbotMessages: FC<IChatBotMessagesProps> = ({allMessages}) => {
         messages.data.map((item) => (
           item.id % 2 !== 0
           ?
-            <div key={item.id}>
+            <div ref={bottomRef} key={item.id}>
               <div className="chatbot__message chatbot__message-bot">
                 <span>{item.message}</span>
               </div>
-              <div ref={bottomRef} />
             </div>
             :
-            <div key={item.id}>
+            <div ref={bottomRef} key={item.id}>
               <div className="chatbot__message chatbot__message-user">
                 <span>{item.message}</span>
               </div>
-              <div ref={bottomRef} />
             </div>
         ))
+      }
+      {
+        isLoading
+        ?
+          <div className="chatbot__message chatbot__message-bot chatbot__message-loading">
+            <span>Бот яза</span>
+          </div>
+          :
+          ""
       }
     </div>
   );

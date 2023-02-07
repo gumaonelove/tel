@@ -15,6 +15,7 @@ interface IMessages {
 
 export interface IChatBotMessagesProps {
   allMessages: string[];
+  isLoading: boolean;
 }
 
 export interface IChatBotStarterProps {
