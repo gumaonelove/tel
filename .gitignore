@@ -139,9 +139,9 @@ cython_debug/
 
 .idea
 /static
-/backend/cms/migrations/
-/backend/study/migrations/
-/backend/static/
+/backend/api/cms/migrations/
+/backend/api/study/migrations/
+/backend/api/static/
 /vps_config/deploy-vps.txt
 /vps_config/open_key.ppk
 /vps_config/secret.ppk
@@ -186,3 +186,6 @@ cython_debug/
 /frontend/next-env.d.ts
 
 ####################################################### Frontend end
+
+
+backend/database/db.sqlite3

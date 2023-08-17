@@ -18,9 +18,11 @@
 4. **requirments.txt** - файл зависимостей
 
 ### Команды администрирования
-* `git clone https://github.com/gumaonelove/tatarby.git`
-* `cd tatarby`
-* `sudo apt-get install python3-venv`
-* `python3 -m venv venv`
-* `source venv/bin/activate`
-* `pip install -r requirments.txt`
+```bash
+git clone https://github.com/gumaonelove/tel.git
+cd tel
+sudo apt-get install python3-venv
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirments.txt
+```
