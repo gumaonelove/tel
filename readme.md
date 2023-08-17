@@ -27,7 +27,7 @@ cd tel
 sudo apt-get install python3-venv
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requirments.txt
 cd backend
+pip install -r requirments.txt
 uvicorn api.app:app
 ```

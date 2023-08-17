@@ -8,7 +8,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
-    "https://tel.saf.tatar/"
+    "https://docs.tel.saf.tatar/"
 ]
 
 app.add_middleware(
@@ -22,4 +22,4 @@ app.add_middleware(
 app.include_router(router)
 
 if __name__ == "__main__":
-    uvicorn.run(app, port=8001)
+    uvicorn.run(app)

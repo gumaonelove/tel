@@ -186,3 +186,4 @@ cython_debug/
 /frontend/next-env.d.ts
 
 ####################################################### Frontend end
+/backend/neiro/latest_silero_models.yml
