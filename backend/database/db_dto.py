@@ -1,5 +1,5 @@
-from db_manager import DatabaseManager
-from db_models import GrammarDTO, ListeningDTO, ReadingDTO, DTOModel
+from .db_manager import DatabaseManager
+from .db_models import GrammarDTO, ListeningDTO, ReadingDTO, DTOModel
 from typing import Type
 
 class DataBaseDTO(DatabaseManager):
@@ -14,13 +14,13 @@ class DataBaseDTO(DatabaseManager):
         await self.insert_into_table("reading", reading_dto)
 
     async def get_grammar_by_id(self, id: int):
-        return await self.get_records_by_id("grammar", GrammarDTO, id)
+        return await self.get_records_by_id("grammar", 'text', GrammarDTO, id)
 
     async def get_listening_by_id(self, id: int):
-        return await self.get_records_by_id("listening", ListeningDTO, id)
+        return await self.get_records_by_id("listening", 'word', ListeningDTO, id)
 
     async def get_reading_by_id(self, id: int):
-        return await self.get_records_by_id("reading", ReadingDTO, id)
+        return await self.get_records_by_id("reading", 'text', ReadingDTO, id)
 
     async def get_all_grammar(self):
         return await self.get_all_records("grammar", GrammarDTO)

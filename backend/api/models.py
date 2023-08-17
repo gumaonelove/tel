@@ -6,12 +6,17 @@ class DialogueMessage(BaseModel):
     '''Сообщение в диалоге'''
     output: str
 
+class Audio(BaseModel):
+    '''wav'''
+    wav_base64: str
+    sample_rate: int
+
 
 class ListeningWord(BaseModel):
     '''Слово в упражнении аудирования'''
     count: int
     word: str
-    wav: str
+    audio: Audio
     id: int
 
 
@@ -19,7 +24,7 @@ class ReadingText(BaseModel):
     '''Предложение упражнения чтения'''
     count: int
     text: str
-    wav: str
+    audio: Audio
     id: int
 
 

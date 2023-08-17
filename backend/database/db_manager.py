@@ -1,5 +1,5 @@
-from backend.database.db import Database
-from db_models import DTOModel
+from .db import Database
+from .db_models import DTOModel
 from typing import List, Type
 
 class DatabaseManager(Database):
@@ -9,11 +9,11 @@ class DatabaseManager(Database):
         values = list(dto.__dict__.values())
         await self.execute(query, values)
 
-    async def get_records_by_id(self, table_name: str, dto_class: Type[DTOModel], id: int) -> DTOModel:
-        query = f"SELECT * FROM {table_name} WHERE id = ?"
+    async def get_records_by_id(self, table_name: str, column: str,  dto_class: Type[DTOModel], id: int) -> DTOModel:
+        query = f"SELECT {column} FROM {table_name} WHERE id = ?"
         record = await self.fetch_one(query, (id,))
         if record:
-            return dto_class(*record)
+            return dto_class(id, *record)
         return None
 
     async def get_all_records(self, table_name: str, dto_class: Type[DTOModel]) -> List[DTOModel]:
