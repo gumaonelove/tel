@@ -186,6 +186,3 @@ cython_debug/
 /frontend/next-env.d.ts
 
 ####################################################### Frontend end
-
-
-backend/database/db.sqlite3
