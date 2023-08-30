@@ -5,8 +5,9 @@ After=network.target
 
 [Service]
 User=USER
-WorkingDirectory=/home/USER/tatarby/neiro
-ExecStart=/home/USER/tatarby/venv/bin/python app.py
+WorkingDirectory=/home/USER/tel/backend
+ExecStart=/bin/bash -c "source venv/bin/activate && uvicorn api.app:app"
+Restart=always
 
 
 [Install]
