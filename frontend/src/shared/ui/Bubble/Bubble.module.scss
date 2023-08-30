@@ -1,0 +1,24 @@
+.Bubble {
+    padding: 40px;
+    border-radius: 30px;
+}
+
+.subtitle {
+    margin-top: 20px;
+}
+
+.right {
+    border-bottom-right-radius: 0;
+}
+
+.left {
+    border-bottom-left-radius: 0;
+}
+
+.primary {
+    background: var(--bubble-bg);
+}
+
+.green_light {
+    background: var(--green-light);
+}

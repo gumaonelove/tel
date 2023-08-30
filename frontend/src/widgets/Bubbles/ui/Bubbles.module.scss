@@ -1,0 +1,17 @@
+.squared {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 170px);
+    grid-gap: 20px;
+
+    .item {
+        &:nth-child(2) {
+            height: 240px;
+        }
+
+        &:last-child {
+            height: 100px;
+            align-self: end;
+        }
+    }
+}

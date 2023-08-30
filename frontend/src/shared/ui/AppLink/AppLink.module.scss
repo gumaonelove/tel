@@ -1,0 +1,28 @@
+.AppLink {
+    color: var(--white);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--white);
+    }
+}
+
+.primary {
+    color: var(--white);
+}
+
+.blue {
+    color: var(--linkColor);
+
+    &:hover {
+        color: var(--linkColor);
+    }
+}
+
+.red {
+    color: var(--red-color);
+
+    &:hover {
+        color: var(--red-color);
+    }
+}

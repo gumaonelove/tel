@@ -1,0 +1,88 @@
+.content {
+    display: flex;
+    min-height: 645px;
+    grid-gap: 20px;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 20px;
+    width: 360px;
+}
+
+.bubble {
+    flex: 1;
+}
+
+.right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    grid-gap: 20px;
+    max-width: calc(100% - 380px);
+}
+
+.rightBottom,
+.rightTop {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    background: var(--item-bg);
+    padding: 30px 35px;
+    border-radius: 30px;
+    flex: 1 1 auto;
+    max-height: 220px;
+    grid-gap: 40px;
+}
+
+.rightTop {
+    align-items: center;
+    background: var(--greyColor);
+    max-height: none;
+}
+
+.rightBottom {
+    align-items: center;
+    justify-content: center;
+    max-height: none;
+}
+
+.middleText {
+    max-width: 780px;
+    padding-left: 35px;
+}
+
+.rightImg {
+    position: absolute;
+    right: 30px;
+    bottom: -170px;
+}
+
+.topText {
+    max-width: 75%;
+}
+
+.button {
+    width: 360px;
+    max-height: 95px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+        margin-right: 20px;
+    }
+}
+
+.audioBubble {
+    width: 400px;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.playBtn {
+    padding: 28px;
+}

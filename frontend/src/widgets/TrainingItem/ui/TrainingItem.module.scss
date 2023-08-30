@@ -1,0 +1,157 @@
+.TrainingItem {
+    flex: 1 1 auto;
+}
+
+.wrapper {
+    background: var(--item-bg);
+    border-radius: 30px;
+    position: relative;
+    padding: 23px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    @media (max-width: 768px) {
+        padding: 25px;
+    }
+    @media (max-width: 576px) {
+        border-radius: 15px;
+    }
+}
+
+.subtitle {
+    margin-top: 10px;
+    color: var(--black);
+}
+
+.big {
+    min-height: 360px;
+
+    .text {
+        max-width: 50%;
+
+        @media (max-width: 768px) {
+            max-width: 65%;
+        }
+
+        &.withoutImage {
+            max-width: 85%;
+
+            @media (max-width: 768px) {
+                max-width: 85%;
+            }
+        }
+    }
+
+    .img {
+        min-width: 300px;
+        @media (max-width: 1550px) {
+            min-width: 150px;
+            max-width: 100%;
+        }
+        @media (max-width: 1200px) {
+            min-width: 220px;
+        }
+        @media (max-width: 576px) {
+            min-width: 100px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        min-height: auto;
+    }
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    font: var(--font-s);
+    font-weight: var(--font-semibold);
+    transition: opacity 0.2s ease-in-out;
+
+    i {
+        margin-right: 15px;
+
+        @media (max-width: 576px) {
+            margin-right: 5px;
+            transform: scale(0.9);
+        }
+    }
+
+    &:hover {
+        transition: opacity 0.2s ease-in-out;
+        opacity: .7;
+    }
+}
+
+.img {
+    mix-blend-mode: multiply;
+    position: absolute;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+
+    img {
+        height: 100%;
+    }
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.text {
+    padding: 17px;
+
+    @media (max-width: 768px) {
+        padding: 0;
+    }
+}
+
+.live {
+    margin: 30px 0;
+
+    @media (max-width: 768px) {
+        margin: 15px 0;
+    }
+}
+
+.white {
+    background: var(--white);
+}
+
+.pink {
+    background: var(--pinkColor);
+}
+
+.blue {
+    background: var(--blueColor);
+}
+
+.purple {
+    background: var(--purpleColor);
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 576px) {
+        transform: scale(0.8);
+    }
+}
+
+.description {
+    margin-top: 30px;
+}

@@ -1,0 +1,18 @@
+@import "reset";
+@import "variables/global";
+
+body {
+    font-family: var(--font-family-main);
+    color: var(--black);
+}
+
+.audio-recorder {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.swiper-slide-active {
+    cursor: default !important;
+}

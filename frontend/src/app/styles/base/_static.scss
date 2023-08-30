@@ -1,0 +1,80 @@
+::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(206, 217, 230, 1);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(190, 201, 214, 1);
+}
+
+li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+figure,
+figcaption {
+    margin: 0;
+    padding: 0;
+}
+html,
+body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: $white;
+    color: $lightColor;
+}
+
+body.lock {
+    overflow: hidden;
+}
+
+.form-input {
+    padding: 20px 120px 20px 40px;
+    background: $white;
+    border: 3px solid $greyColor;
+    border-radius: 15px;
+    color: rgba(8, 8, 8, 0.5);
+    font-size: 28px;
+    line-height: 33px;
+    font-weight: 500;
+    outline: none;
+    width: 100%;
+    @media only screen and (max-width: 768px) {
+        font-size: 20px;
+        line-height: 24px;
+        padding: 20px 80px 20px 20px;
+    }
+    @media only screen and (max-width: 576px) {
+        font-size: 16px;
+        line-height: 20px;
+        padding: 15px 50px 15px 15px;
+    }
+    &.disabled {
+        opacity: .4;
+        cursor: default;
+    }
+}
+
+i {
+    &.disabled {
+        opacity: .5;
+    }
+}

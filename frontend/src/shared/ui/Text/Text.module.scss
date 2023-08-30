@@ -1,0 +1,132 @@
+.Text {
+    font: var(--font-xxs);
+    font-weight: var(--font-regular);
+
+    &.xxxs {
+        font: var(--font-xxxs);
+    }
+
+    &.xxs {
+        font: var(--font-xxs);
+    }
+
+    &.xs {
+        font: var(--font-xs);
+    }
+
+    &.s {
+        font: var(--font-s);
+
+        @media (max-width: 575px) {
+            font: var(--font-xs);
+        }
+    }
+
+    &.xm {
+        font: var(--font-xm);
+    }
+
+    &.m {
+        font: var(--font-m);
+
+        @media (max-width: 768px) {
+            font: var(--font-s);
+        }
+    }
+
+    &.l {
+        font: var(--font-l);
+
+        @media (max-width: 576px) {
+            font: var(--font-s);
+        }
+    }
+
+    &.xlx {
+        font: var(--font-xlx);
+    }
+
+    &.xl {
+        font: var(--font-xl);
+
+        @media (max-width: 768px) {
+            font: var(--font-l);
+        }
+
+        @media (max-width: 576px) {
+            font: var(--font-m);
+        }
+    }
+
+    &.xxl {
+        font: var(--font-xxl);
+
+        @media (max-width: 575px) {
+            font: var(--font-l);
+        }
+    }
+
+    &.xxxl {
+        font: var(--font-xxxl);
+
+        @media (max-width: 991px) {
+            font: var(--font-xxl);
+        }
+
+        @media (max-width: 575px) {
+            font: var(--font-xl);
+        }
+    }
+
+    &.regular {
+        font-weight: var(--font-regular);
+    }
+
+    &.medium {
+        font-weight: var(--font-medium);
+    }
+
+    &.semibold {
+        font-weight: var(--font-semibold);
+    }
+
+    &.bold {
+        font-weight: var(--font-bold);
+    }
+
+    &.extrabold {
+        font-weight: var(--font-extrabold);
+    }
+}
+
+.error {
+    color: red;
+}
+
+.blue {
+    color: var(--linkColor);
+}
+
+.white {
+    color: var(--white);
+}
+
+.green_light {
+    color: var(--green-light);
+}
+
+.red {
+    color: var(--red-color);
+}
+
+.yellow_light {
+    color: var(--yellow-light);
+}
+
+.dark {
+    color: var(--darkColor);
+}
+
+.blue_light {
+    color: var(--blue-light);
+}

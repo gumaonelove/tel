@@ -1,0 +1,35 @@
+.ToastBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.textBlock {
+    margin-right: 50px;
+}
+
+.text {
+    color: var(--black);
+    margin-right: 5px;
+
+    &.error {
+        color: var(--main-text);
+    }
+}
+
+.leftBlock {
+    display: flex;
+    align-items: center;
+
+    .text {
+        margin-left: 10px;
+    }
+}
+
+.btnClose {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
