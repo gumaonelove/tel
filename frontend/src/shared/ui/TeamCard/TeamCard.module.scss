@@ -8,6 +8,10 @@
     justify-content: flex-end;
     position: relative;
     overflow: hidden;
+
+    @media (max-width: 576px) {
+        padding: 20px;
+    }
 }
 
 .links {
@@ -52,6 +56,8 @@
         width: 100%;
         max-width: 100%;
         mix-blend-mode: multiply;
+        object-fit: cover;
+        height: 100%;
     }
 }
 

@@ -7,18 +7,27 @@ import BulatImage from 'shared/assets/images/be.jpg';
 import BulychImage from 'shared/assets/images/bulych.jpg';
 import KerilImage from 'shared/assets/images/keril.jpg';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import ItemImg1 from 'shared/assets/images/exercises/1.png';
-import {
-    Text, TextSize, TextTheme, TextWeight,
-} from 'shared/ui/Text/Text';
-import ItemImg3 from 'shared/assets/images/exercises/3.png';
-import ItemImg2 from 'shared/assets/images/exercises/2.png';
 import cls from './Team.module.scss';
 import { IldarLinks } from '../const/links';
 
 interface TeamProps {
   className?: string;
 }
+
+const breakpoints = {
+    0: {
+        slidesPerView: 1,
+    },
+    560: {
+        slidesPerView: 2,
+    },
+    1200: {
+        slidesPerView: 3,
+    },
+    1550: {
+        slidesPerView: 4,
+    },
+};
 export const Team = (props: TeamProps) => {
     const {
         className,
@@ -28,8 +37,7 @@ export const Team = (props: TeamProps) => {
         <div className={classNames(cls.Team, {}, [className])}>
             <Swiper
                 className={cls.swiper}
-                slidesPerGroup={1}
-                slidesPerView={4}
+                breakpoints={breakpoints}
                 spaceBetween={20}
             >
                 <SwiperSlide

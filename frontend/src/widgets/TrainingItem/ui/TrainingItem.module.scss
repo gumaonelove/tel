@@ -1,5 +1,11 @@
 .TrainingItem {
     flex: 1 1 auto;
+
+    &:first-child {
+        @media (max-width: 1550px) {
+            height: 100%;
+        }
+    }
 }
 
 .wrapper {
@@ -30,6 +36,9 @@
 
     .text {
         max-width: 50%;
+        @media (max-width: 1550px) {
+            max-width: 80%;
+        }
 
         @media (max-width: 768px) {
             max-width: 65%;
@@ -98,6 +107,10 @@
 
     img {
         height: 100%;
+
+        @media (max-width: 1550px) {
+            height: 70%;
+        }
     }
 }
 

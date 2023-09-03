@@ -1,5 +1,9 @@
 .Section {
     margin-top: 50px;
+
+    @media (max-width: 576px) {
+        margin-top: 30px;
+    }
 }
 
 .text {
@@ -10,8 +14,17 @@
     font-size: 64px;
     line-height: 85px;
     font-weight: 700;
+
+    @media (max-width: 576px) {
+        font-size: 40px;
+        line-height: 48px;
+    }
 }
 
 .content {
     margin-top: 50px;
+
+    @media (max-width: 576px) {
+        margin-top: 20px;
+    }
 }

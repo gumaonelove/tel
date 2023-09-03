@@ -20,6 +20,15 @@ import cls from './ExercisesPage.module.scss';
 interface ExercisesPageProps {
   className?: string;
 }
+
+const breakpoints = {
+    0: {
+        slidesPerView: 2,
+    },
+    576: {
+        slidesPerView: 3,
+    },
+};
 const ExercisesPage = (props: ExercisesPageProps) => {
     const {
         className,
@@ -79,8 +88,7 @@ const ExercisesPage = (props: ExercisesPageProps) => {
                     <div className={cls.rightTop}>
                         <Swiper
                             className={cls.swiper}
-                            slidesPerGroup={1}
-                            slidesPerView={3}
+                            breakpoints={breakpoints}
                             loop
                             centeredSlides
                             slideToClickedSlide

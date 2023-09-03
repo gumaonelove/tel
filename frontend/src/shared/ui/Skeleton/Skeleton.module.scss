@@ -4,6 +4,7 @@
     position: relative;
     box-shadow: 0 0 5px 2px var(--blue-light);
     overflow: hidden;
+    flex: 1;
 
     &::before {
         content: "";

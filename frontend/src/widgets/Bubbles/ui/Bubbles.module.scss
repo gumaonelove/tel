@@ -4,6 +4,15 @@
     grid-template-rows: repeat(2, 170px);
     grid-gap: 20px;
 
+    @media (max-width: 1550px) {
+        grid-template-rows: repeat(2, 200px);
+    }
+
+    @media (max-width: 576px) {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
     .item {
         &:nth-child(2) {
             height: 240px;
@@ -12,6 +21,15 @@
         &:last-child {
             height: 100px;
             align-self: end;
+
+            @media (max-width: 1550px) {
+                height: 160px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            height: auto !important;
+            flex: 1 1 auto;
         }
     }
 }

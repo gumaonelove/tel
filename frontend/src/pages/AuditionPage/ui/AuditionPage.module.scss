@@ -2,6 +2,10 @@
     display: flex;
     min-height: 645px;
     grid-gap: 20px;
+
+    @media (max-width: 1200px) {
+        flex-direction: column;
+    }
 }
 
 .left {
@@ -22,6 +26,16 @@
     justify-content: space-between;
     grid-gap: 20px;
     max-width: calc(100% - 380px);
+    min-height: 300px;
+}
+
+.left,
+.right {
+    @media (max-width: 1200px) {
+        width: auto;
+        max-width: none;
+        flex: 1 1 auto;
+    }
 }
 
 .rightBottom,
@@ -35,12 +49,22 @@
     flex: 1 1 auto;
     max-height: 220px;
     grid-gap: 30px;
+
+    @media (max-width: 768px) {
+        grid-gap: 20px;
+        border-radius: 15px;
+    }
 }
 
 .rightTop {
     align-items: center;
     background: var(--greyColor);
     max-height: 265px;
+    justify-content: space-around;
+
+    @media (max-width: 576px) {
+        flex-direction: column;
+    }
 }
 
 .rightBottom {
@@ -57,6 +81,30 @@
     position: absolute;
     right: 30px;
     bottom: -170px;
+
+    @media (max-width: 1550px) {
+        right: 20px;
+        bottom: -100px;
+        max-width: 200px;
+    }
+
+    @media (max-width: 1200px) {
+        right: 20px;
+        bottom: -80px;
+        max-width: 150px;
+    }
+
+    @media (max-width: 768px) {
+        right: 0;
+        bottom: -60px;
+        max-width: 120px;
+    }
+
+    @media (max-width: 576px) {
+        right: 0;
+        bottom: -40px;
+        max-width: 100px;
+    }
 }
 
 .dragItem {
@@ -70,6 +118,10 @@
     max-height: 65px;
     height: 100%;
     transition: opacity 0.2s ease-in-out;
+
+    @media (max-width: 1200px) {
+        min-height: 65px;
+    }
 
     &:hover {
         opacity: 0.7;
@@ -98,10 +150,33 @@
     color: var(--darkColor);
     margin-left: 80px;
 
+    @media (max-width: 1550px) {
+        font-size: 72px;
+        line-height: 78px;
+        margin-left: 40px;
+    }
+
+    @media (max-width: 1200px) {
+        margin-left: 20px;
+    }
+
+    @media (max-width: 992px) {
+        font-size: 48px;
+        line-height: 54px;
+    }
+
     &.blurred {
         filter: blur(35px);
         cursor: default;
         user-select: none;
+
+        @media (max-width: 1200px) {
+            filter: blur(20px);
+        }
+
+        @media (max-width: 992px) {
+            filter: blur(15px);
+        }
     }
 }
 
