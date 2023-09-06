@@ -48,8 +48,11 @@
     padding: 30px 35px;
     border-radius: 30px;
     flex: 1 1 auto;
-    max-height: 220px;
     grid-gap: 30px;
+
+    @media (max-width: 1550px) {
+        max-height: none;
+    }
 
     @media (max-width: 768px) {
         grid-gap: 20px;
@@ -59,14 +62,22 @@
 
 .rightTop {
     background: var(--greyColor);
-    max-height: 265px;
+    min-height: 265px;
+    overflow: hidden;
+
+    @media (max-width: 1550px) {
+        min-height: auto;
+    }
+}
+
+.rightBottom {
+    max-height: none;
 }
 
 .rightTop,
 .rightBottom {
     @media (max-width: 1550px) {
         justify-content: center;
-        max-height: none;
     }
 }
 
@@ -79,11 +90,13 @@
     position: absolute;
     right: 30px;
     bottom: -170px;
+    display: none;
 
     @media (max-width: 1550px) {
         right: 20px;
         bottom: -100px;
         max-width: 200px;
+        display: none;
     }
 
     @media (max-width: 1200px) {
@@ -145,13 +158,26 @@
     align-items: center;
     flex-wrap: wrap;
     flex: 1 1 auto;
-    max-height: 220px;
-    height: 100%;
     position: absolute;
+    grid-row-gap: 51px;
 
     @media (max-width: 1550px) {
         justify-content: center;
+        grid-row-gap: 27px;
+    }
+
+    @media (max-width: 768px) {
+        justify-content: center;
         max-height: none;
+        height: auto;
+        grid-row-gap: 17px;
+    }
+
+    @media (max-width: 576px) {
+        justify-content: center;
+        max-height: none;
+        height: auto;
+        grid-row-gap: 15px;
     }
 }
 
@@ -160,10 +186,10 @@
     min-width: 263px;
     background: var(--linkColor);
     border: none;
-    margin-top: 50px;
+    margin-top: 66px;
 
     @media (max-width: 1550px) {
-        margin-top: 65px;
+        margin-top: 67px;
     }
 }
 
@@ -176,4 +202,10 @@
     @media (max-width: 1550px) {
         justify-content: center;
     }
+}
+
+.rightTopDroppable {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
