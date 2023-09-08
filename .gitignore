@@ -9,17 +9,17 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
+/backend/build/
+/backend/develop-eggs/
+/backend/dist/
+/backend/downloads/
+/backend/eggs/
 .eggs/
-lib64/
-parts/
-sdist/
-var/
-wheels/
+/backend/lib64/
+/backend/parts/
+/backend/sdist/
+/backend/var/
+/backend/wheels/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
