@@ -1,7 +1,26 @@
 .Team {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 40px;
     margin-bottom: 40px;
+
+    @media (max-width: 1550px) {
+        grid-gap: 20px;
+    }
 }
 
-.slide {
-    cursor: grab;
+.card {
+    width: calc(25% - 30px);
+
+    @media (max-width: 1550px) {
+        width: calc(33.33333% - 14px);
+    }
+
+    @media (max-width: 992px) {
+        width: calc(50% - 10px);
+    }
+
+    @media (max-width: 576px) {
+        width: 100%;
+    }
 }
