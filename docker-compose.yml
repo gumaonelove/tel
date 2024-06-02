@@ -1,4 +1,4 @@
-version: '3.8'
+version: '1.0'
 
 services:
   backend:
@@ -7,3 +7,10 @@ services:
     restart: always
     ports:
       - "84:84"
+
+  frontend:
+    container_name: frontend_service_container
+    build: ./frontend
+    restart: always
+    ports:
+      - "3000:3000"

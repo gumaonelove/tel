@@ -22,27 +22,6 @@ export const Team = (props: TeamProps) => {
     return (
         <div className={classNames(cls.Team, {}, [className])}>
             <TeamCard
-                title="Гильмуллин Ринат"
-                subtitle="Директор ИПС АН РТ"
-                image={RinatImage}
-                className={cls.card}
-                links={RALinks}
-            />
-            <TeamCard
-                title="Гатиатуллин Айрат"
-                subtitle="Заместитель директора ИПС АН РТ"
-                image={AyratImage}
-                className={cls.card}
-                links={GALinks}
-            />
-            <TeamCard
-                title="Хакимов Булат"
-                subtitle="Ведущий научный сотрудник ИПС АН РТ"
-                image={BulatImage}
-                className={cls.card}
-                links={HBLinks}
-            />
-            <TeamCard
                 title="Валиев Ильдар"
                 subtitle="Frontend"
                 image={IldarImage}
@@ -54,13 +33,6 @@ export const Team = (props: TeamProps) => {
                 subtitle="Backend & machine learning"
                 image={BulychImage}
                 links={BulatLinks}
-                className={cls.card}
-            />
-            <TeamCard
-                title="Пантелеев Кирилл"
-                subtitle="Machine learning"
-                image={KerilImage}
-                links={KerilLinks}
                 className={cls.card}
             />
         </div>
