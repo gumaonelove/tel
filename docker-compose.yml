@@ -18,13 +18,12 @@ services:
       - tel-network
     depends_on:
       - backend
-  
-  ubuntu:
-    image: ubuntu:24.04
-    restart: always
-    networks:
-      - tel-network
-    command: tail -f /dev/null
+  # ubuntu: &ubuntu 
+  #   image: ubuntu:24.04
+  #   restart: always
+  #   networks:
+  #     - tel-network
+  #   command: tail -f /dev/null
   
 networks:
     tel-network:
