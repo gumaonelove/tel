@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'https://dialo.saf.tatar';
+const baseUrl = 'http://backend:84';
 
 export const $api = axios.create({
     baseURL: baseUrl,
