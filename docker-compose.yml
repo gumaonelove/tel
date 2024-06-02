@@ -1,8 +1,7 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  backend:
-    container_name: backend_container
+  backend: &backend
     build: ./backend
     restart: always
     ports:
@@ -10,14 +9,23 @@ services:
     networks:
       - tel-network
 
-  frontend:
-    container_name: frontend_service_container
+  frontend: &frontend
     build: ./frontend
     restart: always
     ports:
       - "3000:3000"
     networks:
       - tel-network
+    depends_on:
+      - backend
+  
+  ubuntu:
+    image: ubuntu:24.04
+    restart: always
+    networks:
+      - tel-network
+    command: tail -f /dev/null
+  
 networks:
     tel-network:
         driver: bridge
