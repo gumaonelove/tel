@@ -18,12 +18,24 @@ services:
       - tel-network
     depends_on:
       - backend
+
   # ubuntu: &ubuntu 
   #   image: ubuntu:24.04
   #   restart: always
   #   networks:
   #     - tel-network
   #   command: tail -f /dev/null
+
+  admin: &admin
+    build: ./admin
+    restart: always
+    ports:
+      - "83:83"
+    volumes:
+      - ./admin/static:/app/static
+      - ./admin/media:/app/media
+      - ./admin/logs:/app/logs
+      - ./backend/database/db.sqlite3:/app/db.sqlite3
   
 networks:
     tel-network:
