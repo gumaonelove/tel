@@ -1,0 +1,18 @@
+version: '1.0'
+
+services:
+#  api_gateway:
+#    container_name: api_gateway_container
+#    build: ./src/backend/api_gateway
+#    restart: always
+#    ports:
+#      - "82:82"
+#    env_file:
+#      .env
+
+  frontend:
+    container_name: frontend_service_container
+    build: ./frontend
+    restart: always
+    ports:
+      - "3000:3000"
