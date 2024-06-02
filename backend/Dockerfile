@@ -1,13 +1,12 @@
 FROM python:3.11-slim-buster
 
-WORKDIR /code
 
-COPY ./req.txt /code/req.txt
+COPY ./requirements.txt ./requirements.txt
 
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
 
-COPY ./ /code/app
+COPY ./ ./
 
 ENV PYTHONUNBUFFERED 1
 

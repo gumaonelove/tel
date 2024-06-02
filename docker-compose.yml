@@ -7,6 +7,8 @@ services:
     restart: always
     ports:
       - "84:84"
+    networks:
+      - tel-network
 
   frontend:
     container_name: frontend_service_container
@@ -14,3 +16,8 @@ services:
     restart: always
     ports:
       - "3000:3000"
+    networks:
+      - tel-network
+networks:
+    tel-network:
+        driver: bridge
