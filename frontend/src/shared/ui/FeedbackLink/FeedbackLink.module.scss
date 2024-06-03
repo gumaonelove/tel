@@ -1,0 +1,18 @@
+.FeedbackLink {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: var(--purpleColor);
+    border-radius: 50%;
+    padding: 10px;
+
+    svg {
+        fill: white;
+        width: 70%;
+    }
+}

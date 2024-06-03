@@ -4,6 +4,7 @@ import {
 import { $api } from 'shared/api/api';
 import { To } from '@remix-run/router';
 import { NavigateOptions } from 'react-router/dist/lib/context';
+import { scaleBarReducer } from 'widgets/ScaleBar/model/slice/scaleBarSlice';
 import { createReducerManager } from './reducerManager';
 import { StateSchema } from './StateSchema';
 
@@ -14,6 +15,7 @@ export function createReduxStore(
 ) {
     const rootReducers: ReducersMapObject<StateSchema> = {
         ...asyncReducers,
+        scaleBar: scaleBarReducer,
     };
 
     const reducerManager = createReducerManager(rootReducers);

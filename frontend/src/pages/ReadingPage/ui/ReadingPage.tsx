@@ -20,6 +20,8 @@ import { $api } from 'shared/api/api';
 import toast from 'react-hot-toast';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import cls from './ReadingPage.module.scss';
+import {scaleBarActions} from "widgets/ScaleBar/model/slice/scaleBarSlice";
+import {useAppDispatch} from "shared/lib/hooks/useAppDispatch/useAppDispatch";
 
 interface ReadingPageProps {
   className?: string;
@@ -58,6 +60,7 @@ const ReadingPage = (props: ReadingPageProps) => {
     const [reqId, setReqId] = useState(1);
     const [audioBase64, setAudioBase64] = useState('');
     const [isSend, setIsSend] = useState(false);
+    const dispatch = useAppDispatch();
 
     const extractBase64 = (dataUrl: any) => {
         const index = dataUrl.indexOf('base64,');
@@ -123,6 +126,7 @@ const ReadingPage = (props: ReadingPageProps) => {
             if (data.status) {
                 if (data.status === 200) {
                     toast.success('Отлично!');
+                    dispatch(scaleBarActions.addScale());
                     setIsSend(true);
                 } else {
                     toast.error('Что-то пошло не так, попробуйте снова!');

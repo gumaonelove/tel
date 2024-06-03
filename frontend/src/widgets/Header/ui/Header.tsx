@@ -6,6 +6,7 @@ import { useIsFulledHeader } from 'shared/lib/hooks/useIsFulledHeader/useIsFulle
 import { TrainingItem } from 'widgets/TrainingItem';
 import { TrainingItemSize, TrainingItemTheme } from 'widgets/TrainingItem/ui/TrainingItem';
 import BoyIcon from 'shared/assets/images/boy.png';
+import { ScaleBar } from 'widgets/ScaleBar';
 import cls from './Header.module.scss';
 
 interface HeaderProps {
@@ -32,6 +33,11 @@ export const Header = (props: HeaderProps) => {
                                 вместе с Tel by saf.tatar
                             </div>
                         </div>
+                        {!isFulledHeader && (
+                            <div className="header__right">
+                                <ScaleBar />
+                            </div>
+                        )}
                         {
                             isFulledHeader && (
                                 <>

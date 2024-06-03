@@ -17,6 +17,8 @@ import { $api } from 'shared/api/api';
 import toast from 'react-hot-toast';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import cls from './SyntaxPage.module.scss';
+import {useAppDispatch} from "shared/lib/hooks/useAppDispatch/useAppDispatch";
+import {scaleBarActions} from "widgets/ScaleBar/model/slice/scaleBarSlice";
 
 interface SyntaxPageProps {
   className?: string;
@@ -32,6 +34,7 @@ const SyntaxPage = (props: SyntaxPageProps) => {
     const {
         className,
     } = props;
+    const dispatch = useAppDispatch();
     const [givedWords, setGivedWords] = useState<string[]>([]);
     const [droppedWords, setDroppedWords] = useState<string[]>([]);
     const [reqId, setReqId] = useState(1);
@@ -65,6 +68,7 @@ const SyntaxPage = (props: SyntaxPageProps) => {
 
         if (givedSentence === trueSentence) {
             toast.success('Отлично!');
+            dispatch(scaleBarActions.addScale());
             setDoneExercise(true);
         } else {
             toast.error('Неправильно составили предложение, попробуйте снова!');

@@ -16,6 +16,8 @@ import { $api } from 'shared/api/api';
 import toast from 'react-hot-toast';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import cls from './AuditionPage.module.scss';
+import {scaleBarActions} from "widgets/ScaleBar/model/slice/scaleBarSlice";
+import {useAppDispatch} from "shared/lib/hooks/useAppDispatch/useAppDispatch";
 
 interface AuditionPageProps {
   className?: string;
@@ -66,6 +68,7 @@ const AuditionPage = (props: AuditionPageProps) => {
     const [playingAudio, setPlayingAudio] = useState(false);
     const [words, setWords] = useState<string[]>([]);
     const [isContinue, setIsContinue] = useState(false);
+    const dispatch = useAppDispatch();
     const getRandomInRange = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 
     const onClickPlay = useCallback((ref: RefObject<HTMLAudioElement>, changeState: (state: boolean) => void) => {
@@ -116,6 +119,7 @@ const AuditionPage = (props: AuditionPageProps) => {
         setIsContinue(true);
         if (word === dataResp?.word) {
             toast.success('Все верно. Бик яхшы!');
+            dispatch(scaleBarActions.addScale());
         } else {
             toast.error('Неверно! Переходите к следующему слову');
         }

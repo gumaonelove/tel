@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Header } from 'widgets/Header';
 import { Footer } from 'widgets/Footer';
+import { ScaleBar } from 'widgets/ScaleBar';
 import cls from './HeaderAndFooter.module.scss';
 
 interface HeaderAndFooterProps {
